@@ -1,0 +1,103 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "url",
+      "source",
+      "job_title",
+      "company_name",
+      "crawled_date"
+    ],
+    "properties": {
+      "url": {
+        "bsonType": "string",
+        "description": "Unique identifier"
+      },
+      "source": {
+        "enum": [
+          "itviec",
+          "vietnamworks",
+          "linkedin",
+          "topcv"
+        ],
+        "description": "Data source"
+      },
+      "job_title": {
+        "bsonType": "string"
+      },
+      "company_name": {
+        "bsonType": "string"
+      },
+      "salary_raw": {
+        "bsonType": [
+          "string",
+          "null"
+        ],
+        "description": "Target variable (unprocessed)"
+      },
+      "location_raw": {
+        "bsonType": "string",
+        "description": "City/Province"
+      },
+      "work_type": {
+        "bsonType": [
+          "string",
+          "null"
+        ],
+        "description": "Remote/Hybrid/Onsite"
+      },
+      "job_level": {
+        "bsonType": [
+          "string",
+          "null"
+        ],
+        "description": "Junior/Senior/etc"
+      },
+      "requirements_text": {
+        "bsonType": "string",
+        "description": "Full text for NLP extraction"
+      },
+      "skills_tags": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        },
+        "description": "Prog languages, Frameworks"
+      },
+      "experience_raw": {
+        "bsonType": [
+          "string",
+          "null"
+        ]
+      },
+      "english_req": {
+        "bsonType": [
+          "string",
+          "null"
+        ]
+      },
+      "education_raw": {
+        "bsonType": [
+          "string",
+          "null"
+        ]
+      },
+      "contract_type": {
+        "bsonType": [
+          "string",
+          "null"
+        ]
+      },
+      "posted_date": {
+        "bsonType": [
+          "string",
+          "date",
+          "null"
+        ]
+      },
+      "crawled_date": {
+        "bsonType": "date"
+      }
+    }
+  }
+}
