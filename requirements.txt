@@ -1,0 +1,8 @@
+pymongo
+datetime
+logging
+requests
+beautifulsoup4
+selenium
+certifi
+
