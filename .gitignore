@@ -1,1 +1,11 @@
 context.md
+# Môi trường ảo (Quan trọng nhất)
+venv/
+.env/
+
+# File đệm của Python
+__pycache__/
+*.pyc
+
+# File bảo mật thông tin cá nhân
+.env
