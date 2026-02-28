@@ -5,4 +5,5 @@ requests
 beautifulsoup4
 selenium
 certifi
-
+dotenv
+undetected-chromedriver 

@@ -5,9 +5,9 @@ from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 import certifi
-
 from dotenv import load_dotenv
 load_dotenv()
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -16,18 +16,15 @@ logging.basicConfig(
 )
 
 class BaseScraper(ABC):
-    # Collection tên là "vietnamworks_nghgb" để test thử
-    def __init__(self, source_name, db_name="ADYM", collection_name="vietnamworks_nghgb"): 
+    def __init__(self, source_name, db_name="ADYM", collection_name="vietnamworks_nghgb"):
         self.source = source_name
         self.logger = logging.getLogger(self.source)
 
+       
+        
         try:
-            mongo_uri = os.getenv("MONGO_URI")
-            if not mongo_uri:
-                raise ValueError("Khong tim thay MONGO_URI trong file .env")
-            
             self.client = MongoClient(
-                mongo_uri,
+                os.getenv("MONGO_URI"),
                 tlsCAFile=certifi.where()
             )
             self.db = self.client[db_name]
@@ -70,13 +67,8 @@ class MyScraper(BaseScraper):
     def scrape(self):
         self.logger.info(f"Starting scrape for {self.source}")
         # Implement scraping logic here
-        """
-        Cào dữ liệu ở đây
-        """
 
 if __name__ == "__main__":
     # Instantiate the concrete subclass instead of the abstract BaseScraper
     scraper = MyScraper("ITViec")
     scraper.scrape()
-
-

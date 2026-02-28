@@ -2,7 +2,7 @@ import logging
 import time
 import random
 from datetime import datetime
-from base_scraper_new import BaseScraper
+from base_scraper import BaseScraper
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -171,7 +171,7 @@ class VietnamWorksScraper(BaseScraper):
         driver = self.setup_driver()
         
         base_url = "https://www.vietnamworks.com/viec-lam?g=5&j=35.28.27.31.29.36.34.30.26.32.38"
-        total_pages = 5 
+        total_pages = 10 
         
         try:
             for page in range(1, total_pages + 1):
