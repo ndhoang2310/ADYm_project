@@ -5,6 +5,8 @@ from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 import certifi
+from dotenv import load_dotenv
+load_dotenv()
 
 
 logging.basicConfig(
@@ -22,7 +24,7 @@ class BaseScraper(ABC):
         
         try:
             self.client = MongoClient(
-                "mongodb+srv://ndhoang2310_db_user:hoang23102006@adym.qlakg5k.mongodb.net/",
+                os.getenv("MONGO_URI"),
                 tlsCAFile=certifi.where()
             )
             self.db = self.client[db_name]
