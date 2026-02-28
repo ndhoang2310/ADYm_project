@@ -8,3 +8,11 @@ __pycache__/
 
 # File bảo mật thông tin cá nhân
 .env
+
+# Machine Learning Artifacts
+artifacts/
+*.pkl
+*.joblib
+*.h5
+*.pt
+models/saved/

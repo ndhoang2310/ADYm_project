@@ -4,47 +4,54 @@
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![MongoDB](https://img.shields.io/badge/Database-MongoDB-green)](https://www.mongodb.com/)
-[![Status](https://img.shields.io/badge/Status-In_Progress-orange)]()
+[![Machine Learning](https://img.shields.io/badge/Model-Scikit_Learn-orange)](https://scikit-learn.org/)
+[![Status](https://img.shields.io/badge/Status-In_Development-yellow)]()
 
 ## 📖 Giới thiệu (Overview)
-Dự án này nhằm mục đích xây dựng một bức tranh toàn cảnh về thị trường việc làm IT tại Việt Nam thông qua dữ liệu thực tế.
-**Mục tiêu chính:**
-1.  **Data Collection:** Thu thập dữ liệu tin tuyển dụng từ ITviec, VietnamWorks, LinkedIn, TopCV, CareerViet.
-2.  **Cleaning & Processing:** Làm sạch, chuẩn hóa lương (VND/USD), kỹ năng và địa điểm.
-3.  **EDA:** Phân tích xu hướng công nghệ, kỹ năng đang hot.
-4.  **Modeling:** Xây dựng mô hình AI dự đoán mức lương dựa trên kỹ năng và kinh nghiệm.
+Dự án này nhằm mục đích xây dựng một bức tranh toàn cảnh về thị trường việc làm IT tại Việt Nam thông qua dữ liệu thực tế và ứng dụng AI để dự đoán mức lương.
+
+**Quy trình xử lý (Pipeline):**
+1.  **Data Collection:** Thu thập dữ liệu từ ITviec, VietnamWorks, LinkedIn, TopCV, CareerViet.
+2.  **Cleaning & Processing:** Làm sạch, chuẩn hóa lương (VND/USD), kỹ năng (Skill mapping) và địa điểm.
+3.  **EDA:** Phân tích xu hướng công nghệ, so sánh mức lương theo Level/Skill.
+4.  **Modeling:** Huấn luyện mô hình Machine Learning dự đoán mức lương dựa trên profile ứng viên.
 
 ---
 
 ## 📂 Cấu trúc dự án (Project Structure)
-Dự án được tổ chức theo mô hình Monorepo, chia tách rõ ràng giữa thu thập, xử lý và phân tích:
+Dự án được tổ chức theo mô hình chuẩn Data Science, tách biệt giữa Code và Dữ liệu/Model:
 
 ```text
 Vietnam-IT-Market/
-├── crawlers/              # [THU THẬP DỮ LIỆU] - Nơi chứa code cào data
-│   ├── base_scraper.py    # [CORE] Class cha - Config chung cho mọi scraper
-│   ├── topcv/             # Code crawler TopCV
-│   ├── vietnamworks/      # Code crawler VietnamWorks
-│   ├── careerviet/        # Code crawler CareerViet
+├── crawlers/              # [THU THẬP] - Code cào dữ liệu (Scrapers)
+│   ├── base_scraper.py    # [CORE] Class cha - Config chung
+│   ├── topcv/             # Crawler TopCV
+│   ├── vietnamworks/      # Crawler VietnamWorks
+│   ├── careerviet/        # Crawler CareerViet
 │   └── ...
 │
-├── processing/            # [XỬ LÝ DỮ LIỆU] - Code làm sạch & chuẩn hóa
+├── processing/            # [LÀM SẠCH] - Code xử lý thô (Raw -> Clean)
 │   ├── clean_salary.py    # Xử lý cột lương (Text -> Number)
-│   ├── clean_skills.py    # Tách từ khóa kỹ năng
-│   └── dedup_logic.py     # Xử lý tin trùng lặp
+│   ├── clean_skills.py    # Tách và chuẩn hóa từ khóa kỹ năng
+│   └── dedup_logic.py     # Thuật toán gộp tin trùng lặp
 │
-├── analysis/              # [PHÂN TÍCH] - Notebooks EDA & Visualization
+├── analysis/              # [EDA] - Notebooks phân tích & Biểu đồ
 │   ├── 01_overview.ipynb  # Tổng quan thị trường
-│   └── ...
+│   └── 02_skill_salary.ipynb
 │
-├── data/                  # [RESOURCE] Schema, Từ điển & Config
-│   ├── job_schema.json    # Luật validation của MongoDB
-│   └── mapping_dict.json  # Từ điển mapping skill/location
+├── modeling/              # [MODELING] - Code huấn luyện AI (MỚI)
+│   ├── experiments/       # Nơi chứa Notebook thử nghiệm (Nháp)
+│   ├── features.py        # Feature Engineering (One-hot, Vectorizer)
+│   ├── train.py           # Script chính để training ra model
+│   └── predict.py         # Script chạy dự đoán thử
 │
-├── docs/                  # [TÀI LIỆU] Báo cáo & Ghi chú dự án
-│   ├── context.md
-│   └── reports/
+├── artifacts/             # [OUTPUT] - Chứa file Model/Scaler (.pkl)
+│   └── .gitkeep           # (Folder này được gitignore, không up file nặng lên)
 │
-├── .gitignore             # File cấu hình chặn rác (venv, .env, __pycache__)
-├── requirements.txt       # Danh sách thư viện cần thiết
+├── data/                  # [RESOURCE] - Schema & Config
+│   ├── job_schema.json    # Validation rule của MongoDB
+│   └── mapping_dict.json  # Từ điển mapping skill
+│
+├── docs/                  # [DOCS] - Tài liệu báo cáo
+├── requirements.txt       # Danh sách thư viện
 └── README.md              # Hướng dẫn dự án
