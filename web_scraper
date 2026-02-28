@@ -1,0 +1,162 @@
+import time
+import os
+from datetime import datetime
+from abc import ABC, abstractmethod
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from base_scraper import BaseScraper 
+
+class CareerVietCrawler(BaseScraper):
+    def __init__(self):
+        # 1. Gọi init của class cha để khởi tạo MongoDB và Logger
+        super().__init__(source_name="careerviet", collection_name="careerviet_BAK")
+
+        # 2. Cấu hình Selenium
+        chrome_options = Options()
+        chrome_options.add_argument("--headless") # Chạy ẩn nếu cần trên server
+        chrome_options.add_argument("--start-maximized")
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_argument("--incognito")
+        chrome_options.add_argument(
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        )
+
+        self.driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager().install()),
+            options=chrome_options
+        )
+        self.wait = WebDriverWait(self.driver, 15)
+
+    # ================== UTILS ==================
+    def clean_text(self, text):
+        return " ".join(text.split()).strip() if text else ""
+
+    def safe_text(self, by, selector):
+        try:
+            element = self.driver.find_element(by, selector)
+            return self.clean_text(element.text)
+        except:
+            return ""
+
+    def build_page_url(self, start_url, page):
+        if page == 1: return start_url
+        base = start_url.replace("-vi.html", "")
+        return f"{base}-trang-{page}-vi.html"
+
+    def get_info_by_label(self):
+        info = {}
+        try:
+            items = self.driver.find_elements(By.CSS_SELECTOR, "div.detail-box ul li")
+            for item in items:
+                try:
+                    label = item.find_element(By.TAG_NAME, "strong").text
+                    value = item.find_element(By.TAG_NAME, "p").text
+                    info[self.clean_text(label)] = self.clean_text(value)
+                except: continue
+            if "Địa điểm" not in info:
+                loc = self.safe_text(By.CSS_SELECTOR, "div.map p a")
+                if loc: info["Địa điểm"] = loc
+        except: pass
+        return info
+
+    def get_full_section_content(self, section_title):
+        try:
+            xpath = f"//h2[contains(text(), '{section_title}')]/following-sibling::*[preceding-sibling::h2[1][contains(text(), '{section_title}')] and not(self::h2)]"
+            elements = self.driver.find_elements(By.XPATH, xpath)
+            lines = []
+            for e in elements:
+                if e.tag_name == "ul":
+                    lis = e.find_elements(By.TAG_NAME, "li")
+                    lines.extend([self.clean_text(li.text) for li in lis if li.text])
+                else:
+                    txt = self.clean_text(e.text)
+                    if txt: lines.append(txt)
+            return lines
+        except: return []
+
+    # ================== SCRAPE DETAIL ==================
+    def scrape_job_detail(self, url):
+        self.driver.get(url)
+        try:
+            self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".job-detail-content, .cpn-name")))
+        except:
+            return None
+
+        company_name = self.safe_text(By.CSS_SELECTOR, "h2.cpn-name a") or self.safe_text(By.CSS_SELECTOR, ".company-name")
+        job_title = self.safe_text(By.CSS_SELECTOR, "h1")
+        info = self.get_info_by_label()
+        
+        req_list = self.get_full_section_content("Yêu Cầu Công Việc")
+        
+        job_data = {
+            "url": url,
+            "job_title": job_title,
+            "company_name": company_name,
+            "salary_raw": info.get("Lương", ""),
+            "location_raw": info.get("Địa điểm", "Unknown"),
+            "job_description": "\n".join(self.get_full_section_content("Mô tả Công việc")),
+            "requirements_text": "\n".join(req_list),
+            "benefits": "\n".join([self.clean_text(b.text) for b in self.driver.find_elements(By.CSS_SELECTOR, "ul.welfare-list li") if b.text]),
+            "skills_tags": [self.clean_text(t.text) for t in self.driver.find_elements(By.CSS_SELECTOR, ".job-tags a") if t.text],
+            "experience_raw": info.get("Kinh nghiệm", ""),
+            "job_level": info.get("Cấp bậc", ""),
+            "education_raw": info.get("Trình độ học vấn", ""),
+            "contract_type": info.get("Hình thức", ""),
+            "posted_date": info.get("Ngày cập nhật", ""),
+        }
+        return job_data
+
+    # ================== MAIN LOGIC (KẾ THỪA) ==================
+    def scrape(self):
+        """
+        Ghi đè phương thức abstract scrape() của BaseScraper
+        """
+        start_url = "https://careerviet.vn/viec-lam/cntt-phan-cung-mang-cntt-phan-mem-c63,1-vi.html"
+        self.logger.info(f"🚀 Bắt đầu crawl CareerViet: {start_url}")
+        
+        self.driver.get("https://careerviet.vn/")
+        self.driver.delete_all_cookies()
+        
+        page = 1
+        while True:
+            target_url = self.build_page_url(start_url, page)
+            self.logger.info(f"🔎 Đang quét trang {page}: {target_url}")
+            
+            self.driver.get(target_url)
+            time.sleep(3)
+
+            # Lấy danh sách link job
+            links = list(set([
+                a.get_attribute("href")
+                for a in self.driver.find_elements(By.CSS_SELECTOR, "a.job_link")
+                if a.get_attribute("href")
+            ]))
+
+            if not links:
+                self.logger.info("🏁 Không tìm thấy link nào nữa. Kết thúc.")
+                break
+
+            for link in links:
+                try:
+                    data = self.scrape_job_detail(link)
+                    if data:
+                        # Sử dụng hàm save_job của BaseScraper
+                        self.save_job(data)
+                except Exception as e:
+                    self.logger.error(f"❌ Lỗi khi xử lý link {link}: {e}")
+
+            page += 1
+        
+        self.driver.quit()
+        self.logger.info("🎉 Hoàn thành nhiệm vụ!")
+
+if __name__ == "__main__":
+    # Đảm bảo bạn đã set MONGO_URI trong file .env hoặc biến môi trường
+    crawler = CareerVietCrawler()
+    crawler.scrape()
