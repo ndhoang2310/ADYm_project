@@ -4,37 +4,47 @@
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![MongoDB](https://img.shields.io/badge/Database-MongoDB-green)](https://www.mongodb.com/)
-[![Status](https://img.shields.io/badge/Status-Data_Collection-orange)]()
+[![Status](https://img.shields.io/badge/Status-In_Progress-orange)]()
 
 ## 📖 Giới thiệu (Overview)
 Dự án này nhằm mục đích xây dựng một bức tranh toàn cảnh về thị trường việc làm IT tại Việt Nam thông qua dữ liệu thực tế.
 **Mục tiêu chính:**
-1.  **Data Collection:** Thu thập 10,000+ tin tuyển dụng từ ITviec, VietnamWorks, LinkedIn.
-2.  **EDA:** Phân tích xu hướng công nghệ, kỹ năng đang hot.
-3.  **Modeling:** Xây dựng mô hình AI dự đoán mức lương dựa trên kỹ năng và kinh nghiệm.
-
----
-
-## 🏗️ Kiến trúc hệ thống (Architecture)
-Để đảm bảo tính nhất quán dữ liệu giữa các nguồn khác nhau, dự án sử dụng kiến trúc **OOP Scraper**:
-
-* **Database:** MongoDB (Local) với Schema Validation chặt chẽ.
-* **Core:** `BaseScraper` (Class cha) xử lý kết nối DB, ghi log và chống trùng lặp.
-* **Spiders:** Các Scraper con (Dev A, B, C) kế thừa từ Core và thực hiện logic cào riêng biệt.
+1.  **Data Collection:** Thu thập dữ liệu tin tuyển dụng từ ITviec, VietnamWorks, LinkedIn, TopCV, CareerViet.
+2.  **Cleaning & Processing:** Làm sạch, chuẩn hóa lương (VND/USD), kỹ năng và địa điểm.
+3.  **EDA:** Phân tích xu hướng công nghệ, kỹ năng đang hot.
+4.  **Modeling:** Xây dựng mô hình AI dự đoán mức lương dựa trên kỹ năng và kinh nghiệm.
 
 ---
 
 ## 📂 Cấu trúc dự án (Project Structure)
+Dự án được tổ chức theo mô hình Monorepo, chia tách rõ ràng giữa thu thập, xử lý và phân tích:
+
 ```text
 Vietnam-IT-Market/
-├── data/                  # Chứa dữ liệu thô (nếu cần export ra file)
-├── scrapers/              # KHÔNG GIAN LÀM VIỆC CỦA DEV
-│   ├── __init__.py
-│   ├── base_scraper.py    # [CORE] Class cha - KHÔNG SỬA file này
-│   ├── itviec_scraper.py  # [Task Dev A]
-│   ├── vnworks_scraper.py # [Task Dev B]
-│   └── linkedin_scraper.py# [Task Dev C]
-├── job_schema.json        # [RULES] Luật validation của Database
-├── setup_db.py            # [SCRIPT] Khởi tạo Database & Index
-├── requirements.txt       # Các thư viện cần thiết
-└── README.md              # Tài liệu hướng dẫn
+├── crawlers/              # [THU THẬP DỮ LIỆU] - Nơi chứa code cào data
+│   ├── base_scraper.py    # [CORE] Class cha - Config chung cho mọi scraper
+│   ├── topcv/             # Code crawler TopCV
+│   ├── vietnamworks/      # Code crawler VietnamWorks
+│   ├── careerviet/        # Code crawler CareerViet
+│   └── ...
+│
+├── processing/            # [XỬ LÝ DỮ LIỆU] - Code làm sạch & chuẩn hóa
+│   ├── clean_salary.py    # Xử lý cột lương (Text -> Number)
+│   ├── clean_skills.py    # Tách từ khóa kỹ năng
+│   └── dedup_logic.py     # Xử lý tin trùng lặp
+│
+├── analysis/              # [PHÂN TÍCH] - Notebooks EDA & Visualization
+│   ├── 01_overview.ipynb  # Tổng quan thị trường
+│   └── ...
+│
+├── data/                  # [RESOURCE] Schema, Từ điển & Config
+│   ├── job_schema.json    # Luật validation của MongoDB
+│   └── mapping_dict.json  # Từ điển mapping skill/location
+│
+├── docs/                  # [TÀI LIỆU] Báo cáo & Ghi chú dự án
+│   ├── context.md
+│   └── reports/
+│
+├── .gitignore             # File cấu hình chặn rác (venv, .env, __pycache__)
+├── requirements.txt       # Danh sách thư viện cần thiết
+└── README.md              # Hướng dẫn dự án
