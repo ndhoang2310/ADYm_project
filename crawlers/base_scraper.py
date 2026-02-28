@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 
 class BaseScraper(ABC):
-    def __init__(self, source_name, db_name="ADYM", collection_name="raw_jobs"):
+    def __init__(self, source_name, db_name="ADYM", collection_name="vietnamworks_nghgb"):
         self.source = source_name
         self.logger = logging.getLogger(self.source)
 
@@ -72,5 +72,3 @@ if __name__ == "__main__":
     # Instantiate the concrete subclass instead of the abstract BaseScraper
     scraper = MyScraper("ITViec")
     scraper.scrape()
-
-
