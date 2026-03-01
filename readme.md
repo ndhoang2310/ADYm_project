@@ -4,37 +4,54 @@
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![MongoDB](https://img.shields.io/badge/Database-MongoDB-green)](https://www.mongodb.com/)
-[![Status](https://img.shields.io/badge/Status-Data_Collection-orange)]()
+[![Machine Learning](https://img.shields.io/badge/Model-Scikit_Learn-orange)](https://scikit-learn.org/)
+[![Status](https://img.shields.io/badge/Status-In_Development-yellow)]()
 
 ## 📖 Giới thiệu (Overview)
-Dự án này nhằm mục đích xây dựng một bức tranh toàn cảnh về thị trường việc làm IT tại Việt Nam thông qua dữ liệu thực tế.
-**Mục tiêu chính:**
-1.  **Data Collection:** Thu thập 10,000+ tin tuyển dụng từ ITviec, VietnamWorks, LinkedIn.
-2.  **EDA:** Phân tích xu hướng công nghệ, kỹ năng đang hot.
-3.  **Modeling:** Xây dựng mô hình AI dự đoán mức lương dựa trên kỹ năng và kinh nghiệm.
+Dự án này nhằm mục đích xây dựng một bức tranh toàn cảnh về thị trường việc làm IT tại Việt Nam thông qua dữ liệu thực tế và ứng dụng AI để dự đoán mức lương.
 
----
-
-## 🏗️ Kiến trúc hệ thống (Architecture)
-Để đảm bảo tính nhất quán dữ liệu giữa các nguồn khác nhau, dự án sử dụng kiến trúc **OOP Scraper**:
-
-* **Database:** MongoDB (Local) với Schema Validation chặt chẽ.
-* **Core:** `BaseScraper` (Class cha) xử lý kết nối DB, ghi log và chống trùng lặp.
-* **Spiders:** Các Scraper con (Dev A, B, C) kế thừa từ Core và thực hiện logic cào riêng biệt.
+**Quy trình xử lý (Pipeline):**
+1.  **Data Collection:** Thu thập dữ liệu từ ITviec, VietnamWorks, LinkedIn, TopCV, CareerViet.
+2.  **Cleaning & Processing:** Làm sạch, chuẩn hóa lương (VND/USD), kỹ năng (Skill mapping) và địa điểm.
+3.  **EDA:** Phân tích xu hướng công nghệ, so sánh mức lương theo Level/Skill.
+4.  **Modeling:** Huấn luyện mô hình Machine Learning dự đoán mức lương dựa trên profile ứng viên.
 
 ---
 
 ## 📂 Cấu trúc dự án (Project Structure)
+Dự án được tổ chức theo mô hình chuẩn Data Science, tách biệt giữa Code và Dữ liệu/Model:
+
 ```text
 Vietnam-IT-Market/
-├── data/                  # Chứa dữ liệu thô (nếu cần export ra file)
-├── scrapers/              # KHÔNG GIAN LÀM VIỆC CỦA DEV
-│   ├── __init__.py
-│   ├── base_scraper.py    # [CORE] Class cha - KHÔNG SỬA file này
-│   ├── itviec_scraper.py  # [Task Dev A]
-│   ├── vnworks_scraper.py # [Task Dev B]
-│   └── linkedin_scraper.py# [Task Dev C]
-├── job_schema.json        # [RULES] Luật validation của Database
-├── setup_db.py            # [SCRIPT] Khởi tạo Database & Index
-├── requirements.txt       # Các thư viện cần thiết
-└── README.md              # Tài liệu hướng dẫn
+├── crawlers/              # [THU THẬP] - Code cào dữ liệu (Scrapers)
+│   ├── base_scraper.py    # [CORE] Class cha - Config chung
+│   ├── topcv/             # Crawler TopCV
+│   ├── vietnamworks/      # Crawler VietnamWorks
+│   ├── careerviet/        # Crawler CareerViet
+│   └── ...
+│
+├── processing/            # [LÀM SẠCH] - Code xử lý thô (Raw -> Clean)
+│   ├── clean_salary.py    # Xử lý cột lương (Text -> Number)
+│   ├── clean_skills.py    # Tách và chuẩn hóa từ khóa kỹ năng
+│   └── dedup_logic.py     # Thuật toán gộp tin trùng lặp
+│
+├── analysis/              # [EDA] - Notebooks phân tích & Biểu đồ
+│   ├── 01_overview.ipynb  # Tổng quan thị trường
+│   └── 02_skill_salary.ipynb
+│
+├── modeling/              # [MODELING] - Code huấn luyện AI (MỚI)
+│   ├── experiments/       # Nơi chứa Notebook thử nghiệm (Nháp)
+│   ├── features.py        # Feature Engineering (One-hot, Vectorizer)
+│   ├── train.py           # Script chính để training ra model
+│   └── predict.py         # Script chạy dự đoán thử
+│
+├── artifacts/             # [OUTPUT] - Chứa file Model/Scaler (.pkl)
+│   └── .gitkeep           # (Folder này được gitignore, không up file nặng lên)
+│
+├── data/                  # [RESOURCE] - Schema & Config
+│   ├── job_schema.json    # Validation rule của MongoDB
+│   └── mapping_dict.json  # Từ điển mapping skill
+│
+├── docs/                  # [DOCS] - Tài liệu báo cáo
+├── requirements.txt       # Danh sách thư viện
+└── README.md              # Hướng dẫn dự án

@@ -1,1 +1,19 @@
-context.md
+# Môi trường ảo (Quan trọng nhất)
+venv/
+.env/
+
+# File đệm của Python
+__pycache__/
+*.pyc
+
+# File bảo mật thông tin cá nhân
+.env
+
+# Machine Learning Artifacts
+artifacts/
+*.pkl
+*.joblib
+*.h5
+*.pt
+models/saved/
+data/raw_jobs.csv
