@@ -16,3 +16,4 @@ artifacts/
 *.h5
 *.pt
 models/saved/
+data/raw_jobs.csv

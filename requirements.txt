@@ -1,9 +1,23 @@
+# ============================================================
+# Vietnam IT Market Analysis & Salary Prediction
+# requirements.txt — Full pipeline dependencies
+# ============================================================
+
+# ----------------------------
+# [CRAWLING] — Phase 1 (hiện có)
+# ----------------------------
 pymongo
-datetime
-logging
 requests
 beautifulsoup4
 selenium
+undetected-chromedriver
 certifi
-dotenv
-undetected-chromedriver 
+python-dotenv          # đổi từ 'dotenv' → tên package đúng trên PyPI
+
+# ----------------------------
+# [PROCESSING & CLEANING] — Phase 2
+# ----------------------------
+pandas
+numpy
+regex                  # re mở rộng, dùng cho NLP pattern matching
+
