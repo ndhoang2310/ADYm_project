@@ -65,21 +65,46 @@ def process_salary(s):
     
 # 2. Hàm xử lý Kinh nghiệm
 def process_exp(s):
-    if pd.isna(s): return np.nan
-    s = str(s).lower()
+    # 1. Nếu trống (NaN, Null)
+    if pd.isna(s): 
+        return -1.0
+        
+    s_lower = str(s).lower().strip()
     
-    # b. Quy ước Text sang số
-    if any(x in s for x in ['không yêu cầu', 'chưa có', 'fresher', 'mới tốt nghiệp', 'không đòi hỏi']):
+    # 2. Các từ khóa báo hiệu dữ liệu trống/ẩn
+    if s_lower in ['không hiển thị', 'none', 'null', '']:
+        return -1.0
+        
+    # 3. Không yêu cầu / Chưa có kinh nghiệm
+    if any(x in s_lower for x in ['không yêu cầu', 'chưa có', 'fresher', 'mới tốt nghiệp', 'không đòi hỏi']):
         return 0.0
-    if 'dưới 1' in s or '< 1' in s or 'dưới 1 năm' in s:
+        
+    # 4. Dưới 1 năm
+    if 'dưới 1' in s_lower or '< 1' in s_lower:
         return 0.5
         
-    # a. Tách Text ra số
-    nums = re.findall(r'\d+(?:[.,]\d+)?', s)
-    if nums:
-        return float(nums[0].replace(',', '.'))
-    return np.nan
-
+    # 5. Dùng Regex để móc TẤT CẢ các con số ra khỏi chuỗi
+    # r'\d+' sẽ bỏ qua các dấu trừ (VD: "-1 - 15 năm" sẽ lấy được 1 và 15)
+    nums = re.findall(r'\d+(?:\.\d+)?', s_lower)
+    
+    if not nums:
+        return -1.0
+        
+    # Ép kiểu sang float
+    num_vals = [float(n) for n in nums]
+    
+    # 6. Xử lý các số đã tìm được
+    if len(num_vals) == 1:
+        # Trường hợp chỉ có 1 số: "5 năm", "Trên 5 năm", "Lên đến 1 năm", "3"
+        return num_vals[0]
+        
+    elif len(num_vals) >= 2:
+        # Trường hợp a - b năm (VD: "3 - 5 năm", "0-50 năm", "-1 - 15 Năm")
+        # Ta lấy giá trị nhỏ nhất (Min) theo như chiến thuật đã phân tích
+        # Nếu bạn đổi ý muốn lấy trung bình, chỉ cần thay bằng: return (num_vals[0] + num_vals[1]) / 2.0
+        return min(num_vals[0], num_vals[1])
+        
+    return -1.0
 # 3. Hàm mapping Địa điểm
 def process_location(s):
     if pd.isna(s): return 'Khác'
