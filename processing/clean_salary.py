@@ -82,15 +82,85 @@ def process_exp(s):
 
 # 3. Hàm mapping Địa điểm
 def process_location(s):
-    if pd.isna(s): return 'Others'
-    s = str(s).lower()
+    if pd.isna(s): return 'Khác'
     
-    # a. Mapping theo Group
-    if any(x in s for x in ['remote', 'từ xa']): return 'Remote'
-    elif any(x in s for x in ['hồ chí minh', 'hcm', 'ho chi minh', 'thủ đức', 'sài gòn']): return 'Hồ Chí Minh'
-    elif any(x in s for x in ['hà nội', 'ha noi', 'hn']): return 'Hà Nội'
-    elif any(x in s for x in ['đà nẵng', 'da nang', 'đn']): return 'Đà Nẵng'
-    else: return 'Others'
+    s_lower = str(s).lower()
+    
+    # Những từ khóa rác báo hiệu dữ liệu trống hoặc không hợp lệ
+    if s_lower.strip() in ['0', 'unknown', 'not available, none', 'none']:
+        return 'Khác'
+
+    found_locs = set() # Dùng set để tránh trùng lặp nếu chuỗi ghi "Hà Nội, Cầu Giấy, Hà Nội"
+    
+    # 1. Quét các yếu tố Quốc tế -> Gắn mác 'Khác'
+    if any(x in s_lower for x in ['nước ngoài', 'nhật bản', 'quốc tế', 'international', 'japan', 'singapore']):
+        found_locs.add('Khác')
+        
+    # 2. Quét Remote
+    if any(x in s_lower for x in ['remote', 'từ xa', 'tại nhà']):
+        found_locs.add('Remote')
+
+    # 3. Từ điển 63 Tỉnh Thành & Các biến thể phổ biến
+    provinces_map = {
+        'Hồ Chí Minh': ['hồ chí minh', 'hcm', 'sài gòn', 'saigon', 'thủ đức', 'nhà bè', 'cần giờ', 'củ chi', 'hóc môn'],
+        'Hà Nội': ['hà nội', 'ha noi', 'hn', 'cầu giấy', 'nam từ liêm', 'bắc từ liêm', 'thanh xuân', 'hoàn kiếm', 'ba đình', 'đống đa', 'tây hồ', 'hoàng mai', 'long biên', 'gia lâm', 'hoài đức'],
+        'Đà Nẵng': ['đà nẵng', 'da nang', 'đn', 'sơn trà', 'hải châu', 'liên chiểu', 'ngũ hành sơn', 'cẩm lệ'],
+        'Bình Dương': ['bình dương', 'dĩ an', 'thuận an', 'thủ dầu một', 'bến cát', 'tân uyên'],
+        'Đồng Nai': ['đồng nai', 'biên hòa', 'long thành', 'nhơn trạch'],
+        'Bà Rịa - Vũng Tàu': ['bà rịa', 'vũng tàu', 'đất đỏ', 'tân thành'],
+        'Thừa Thiên Huế': ['huế', 'thừa thiên huế'],
+        'Đắk Lắk': ['đắk lắk', 'dak lak', 'đắc lắc'],
+        'Hải Phòng': ['hải phòng', 'hai phong'],
+        'Cần Thơ': ['cần thơ', 'can tho'],
+        'Bắc Ninh': ['bắc ninh'],
+        'Hưng Yên': ['hưng yên'],
+        'Ninh Bình': ['ninh bình'],
+        'Đồng Tháp': ['đồng tháp'],
+        'Thái Nguyên': ['thái nguyên'],
+        'Phú Thọ': ['phú thọ'],
+        'Gia Lai': ['gia lai'],
+        'Lâm Đồng': ['lâm đồng'],
+        'Khánh Hòa': ['khánh hòa', 'nha trang'],
+        'Quảng Ninh': ['quảng ninh'],
+        'Tây Ninh': ['tây ninh'],
+        'Quảng Trị': ['quảng trị'],
+        'Quảng Ngãi': ['quảng ngãi'],
+        'Nghệ An': ['nghệ an'],
+        'Thanh Hóa': ['thanh hóa'],
+        'Hà Nam': ['hà nam'],
+        'Bến Tre': ['bến tre'],
+        'Cà Mau': ['cà mau'],
+        'Kiên Giang': ['kiên giang'],
+        'Tiền Giang': ['tiền giang'],
+        'Hải Dương': ['hải dương'],
+        'Điện Biên': ['điện biên'],
+        'Bình Phước': ['bình phước', 'đồng xoài'],
+        'Long An': ['long an', 'cần giuộc'],
+        'Cao Bằng': ['cao bằng'],
+        'Lạng Sơn': ['lạng sơn'],
+        'Vĩnh Phúc': ['vĩnh phúc'],
+        'Hòa Bình': ['hòa bình'],
+        'Sóc Trăng': ['sóc trăng'],
+        'Thái Bình': ['thái bình'],
+        'Hà Tĩnh': ['hà tĩnh'],
+        'Bắc Giang': ['bắc giang']
+    }
+
+    # Quét chuỗi dựa trên từ điển
+    for clean_name, keywords in provinces_map.items():
+        if any(keyword in s_lower for keyword in keywords):
+            found_locs.add(clean_name)
+
+    # Nếu quét xong không tìm thấy tỉnh nào -> Cho vào 'Khác'
+    if not found_locs:
+        found_locs.add('Khác')
+        
+    # Xử lý format đầu ra: List nếu nhiều nơi, String nếu 1 nơi
+    found_list = list(found_locs)
+    if len(found_list) == 1:
+        return found_list[0]
+    else:
+        return found_list
 
 # 4. Hàm mapping Job Level (Ordinal Encoding)
 def process_level(s):
@@ -103,6 +173,47 @@ def process_level(s):
     elif any(x in s for x in ['senior', 'trưởng nhóm', 'lead', 'chuyên gia', 'cao cấp']): return 3.0
     elif any(x in s for x in ['manager', 'quản lý', 'giám đốc', 'director', 'trưởng phòng', 'head']): return 4.0
     return np.nan
+
+# 5. Chuẩn hóa contract_type:
+def process_contract_type(s):
+    if pd.isna(s):
+        return np.nan # Trả về NaN cho các dòng trống
+        
+    s_lower = str(s).lower()
+    types_found = []
+    
+    # 1. Full-time
+    if any(x in s_lower for x in ['full-time', 'fulltime', 'nhân viên chính thức', 'toàn thời gian']):
+        if 'Full-time' not in types_found:
+            types_found.append('Full-time')
+            
+    # 2. Part-time
+    if any(x in s_lower for x in ['part-time', 'parttime', 'bán thời gian']):
+        if 'Part-time' not in types_found:
+            types_found.append('Part-time')
+            
+    # 3. Freelance
+    if any(x in s_lower for x in ['freelance', 'thời vụ', 'nghề tự do', 'dự án']):
+        if 'Freelance' not in types_found:
+            types_found.append('Freelance')
+            
+    # 4. Intern
+    if any(x in s_lower for x in ['thực tập', 'intern']):
+        if 'Intern' not in types_found:
+            types_found.append('Intern')
+            
+    # 5. Khác (Bao gồm "Khác", "Làm tại nhà" hoặc những chuỗi không khớp với 4 loại trên)
+    if 'khác' in s_lower or 'làm tại nhà' in s_lower or len(types_found) == 0:
+        if 'Khác' not in types_found:
+            types_found.append('Khác')
+
+    # Trả về kết quả
+    if len(types_found) == 1:
+        return types_found[0] # Trả về chuỗi (string) nếu chỉ có 1
+    elif len(types_found) > 1:
+        return types_found    # Trả về mảng (list) nếu có nhiều hình thức
+    else:
+        return np.nan
 
 if __name__ == "__main__":
     # ĐÃ SỬA: Đường dẫn trỏ tới thư mục data
@@ -121,6 +232,7 @@ if __name__ == "__main__":
     df['exp_years'] = df['experience_raw'].apply(process_exp)
     df['location'] = df['location_raw'].apply(process_location)
     df['job_level'] = df['job_level'].apply(process_level)
+    df['contract_type'] = df['contract_type'].apply(process_contract_type)
     
     # Giữ lại đúng các feature theo yêu cầu
     final_cols = [
