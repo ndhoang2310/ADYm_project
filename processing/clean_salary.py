@@ -8,97 +8,86 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 
 # 1. Hàm bóc tách và quy đổi Lương
 def process_salary(s):
-    # 1. Bỏ qua dòng trống
     if pd.isna(s): 
         return np.nan, np.nan
         
     s = str(s).lower()
     
-    # 2. Xử lý Lương Thỏa Thuận / Thương Lượng
     if any(x in s for x in ['thương lượng', 'thỏa thuận', 'thoả thuận', 'cạnh tranh']):
         return np.nan, np.nan
-    # Xử lý các dòng chỉ có số 0 
     if s.strip() in ['0', '0.0 - 0.0 triệu', '0.0-0.0']:
         return np.nan, np.nan
         
-    # 3. Nhận diện các Keyword quan trọng
     is_usd = 'usd' in s or '$' in s
     is_jpy = '¥' in s or 'jpy' in s or 'yên' in s
     is_year = 'năm' in s or 'year' in s or '/năm' in s
     
-    # Lọc bỏ phần thưởng (bonus) nếu họ ghi chung vào lương cơ bản
+    # BẮT THÊM CỜ: Kiểm tra xem trong câu có chữ "triệu" không
+    is_trieu = any(x in s for x in ['triệu', 'tr', 'm', 'million'])
+    
     if 'bonus' in s:
         s = s.split('bonus')[0]
         
-    # 4. Làm sạch và Bóc tách số
     s_clean = s.replace(' ', '')
     raw_nums = re.findall(r'\d+(?:[.,]\d+)*', s_clean)
     nums = []
     
     for num_str in raw_nums:
-        # Nhận diện dấu chấm/phẩy phân cách hàng nghìn (VD: 23.483.250)
         if re.match(r'^\d{1,3}([.,]\d{3})+$', num_str):
             n = float(re.sub(r'[.,]', '', num_str))
         else:
-            # Nhận diện số thập phân (VD: 15.5 hoặc 15,5)
             n = float(num_str.replace(',', '.'))
         nums.append(n)
         
     if not nums:
         return np.nan, np.nan
         
-    # 5. QUY ĐỔI TOÀN BỘ VỀ ĐƠN VỊ TRIỆU VNĐ
     converted_nums = []
     for n in nums:
-        # Trường hợp "Ảo tưởng": Ghi USD nhưng số > 1 Triệu -> Bắt buộc hiểu là VNĐ
         if is_usd and n >= 1000000:
             converted_nums.append(n / 1000000)
-            
-        # Trường hợp USD chuẩn
         elif is_usd:
-            n_vnd = n * 25000  # Tỷ giá 1 USD = 25,000 VNĐ
+            n_vnd = n * 25000
             converted_nums.append(n_vnd / 1000000)
-            
-        # Trường hợp JPY (Yên) chuẩn
         elif is_jpy:
-            converted_nums.append((n * 160) / 1000000)  # Tỷ giá 1 JPY = 160 VNĐ
-            
-        # Trường hợp VNĐ
+            converted_nums.append((n * 160) / 1000000)
         else:
-            if n > 100000:        # VD: 15.000.000 -> 15 (Triệu)
+            # === LOGIC MỚI SIÊU CHẶT CHẼ ===
+            if n >= 100000:         # VD: 15.000.000 -> 15 Triệu
                 val = n / 1000000
-            elif n > 1000:        # VD: 40.000 (HR hay viết tắt) -> 40 (Triệu)
-                val = n / 1000
-            else:                 # VD: 15 -> 15 (Triệu)
+            elif n >= 1000:         # VD: 1000, 2000
+                if is_trieu:        # Nếu ghi "1000 triệu"
+                    val = n
+                else:               # Nếu ghi "VND 1.000" -> 1 Triệu
+                    val = n / 1000 
+            elif n >= 100:          # VD: 800, 150, 100
+                if is_trieu:        # Nếu ghi "100 - 150 triệu" -> Giữ nguyên 100 Triệu
+                    val = n
+                else:               # Nếu ghi "800 - 1000 ₫" -> 0.8 Triệu (800k)
+                    val = n / 1000 
+            else:                   # VD: 15, 20 -> 15 Triệu
                 val = n
                 
-            # Xử lý trường hợp chữ "tỷ / tỉ"
             if 'tỷ' in s or 'tỉ' in s:
                 val = val * 1000
                 
             converted_nums.append(val)
                 
-    # 6. Nếu là lương năm, chia đều cho 12 tháng
     if is_year:
         converted_nums = [n / 12 for n in converted_nums]
         
     if all(n == 0 for n in converted_nums):
         return np.nan, np.nan
         
-    # 7. Tính Min - Max
     if len(converted_nums) == 1:
         val = converted_nums[0]
-        # Lương "lên đến" / Max
         if any(x in s for x in ['up to', 'upto', 'lên đến', 'tới', 'tối đa', 'max']):
             return np.nan, round(val, 2)
-        # Lương "từ" / Min
         elif any(x in s for x in ['từ', 'from', 'trên', 'min', 'hơn']):
             return round(val, 2), np.nan
-        # Lương cứng (Fix)
         else:
             return round(val, 2), round(val, 2)
     else:
-        # Nếu có từ 2 số trở lên
         c_min = min(converted_nums[0], converted_nums[1])
         c_max = max(converted_nums[0], converted_nums[1])
         return round(c_min, 2), round(c_max, 2)
