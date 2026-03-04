@@ -164,15 +164,38 @@ def process_location(s):
 
 # 4. Hàm mapping Job Level (Ordinal Encoding)
 def process_level(s):
-    if pd.isna(s): return np.nan
-    s = str(s).lower()
+    # Nếu trống (NaN, None) -> Trả về -1
+    if pd.isna(s): 
+        return -1
+        
+    s_lower = str(s).lower().strip()
     
-    if any(x in s for x in ['thực tập', 'intern', 'sinh viên']): return 0.0
-    elif any(x in s for x in ['fresher', 'mới tốt nghiệp']): return 1.0
-    elif any(x in s for x in ['nhân viên', 'junior', 'chuyên viên', 'staff', 'middle', 'mid']): return 2.0
-    elif any(x in s for x in ['senior', 'trưởng nhóm', 'lead', 'chuyên gia', 'cao cấp']): return 3.0
-    elif any(x in s for x in ['manager', 'quản lý', 'giám đốc', 'director', 'trưởng phòng', 'head']): return 4.0
-    return np.nan
+    # Mức 5: Giám đốc / Cấp cao
+    if any(x in s_lower for x in ['giám đốc', 'cấp cao']):
+        return 5
+        
+    # Mức 4: Quản lý / Trưởng - Phó phòng / Trưởng chi nhánh
+    if any(x in s_lower for x in ['quản lý', 'trưởng phòng', 'phó phòng', 'trưởng/phó phòng', 'trưởng chi nhánh']):
+        return 4
+        
+    # Mức 3: Trưởng nhóm / Giám sát
+    if any(x in s_lower for x in ['trưởng nhóm', 'giám sát']):
+        return 3
+        
+    # Mức 2: Nhân viên
+    if 'nhân viên' in s_lower:
+        return 2
+        
+    # Mức 1: Mới tốt nghiệp = Fresher
+    if 'mới tốt nghiệp' in s_lower or 'fresher' in s_lower:
+        return 1
+        
+    # Mức 0: Thực tập sinh / Sinh viên = Intern
+    if any(x in s_lower for x in ['thực tập', 'sinh viên', 'intern']):
+        return 0
+        
+    # Nếu có giá trị nào khác không khớp với các từ khóa trên
+    return -1
 
 # 5. Chuẩn hóa contract_type:
 def process_contract_type(s):
