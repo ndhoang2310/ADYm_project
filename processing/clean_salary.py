@@ -12,15 +12,17 @@ def process_salary(s):
         return np.nan, np.nan
     s = str(s).lower()
     
-    # a. Nếu "Thương lượng", "Thỏa thuận" -> NaN
+    # 1. Bỏ qua nếu là Thương lượng / Thỏa thuận
     if any(x in s for x in ['thương lượng', 'thỏa thuận', 'cạnh tranh']):
         return np.nan, np.nan
         
-    # Nhận diện USD
+    # 2. Nhận diện các loại tiền tệ
     is_usd = 'usd' in s or '$' in s
+    is_jpy = '¥' in s or 'jpy' in s or 'yên' in s  # ĐÃ THÊM: Nhận diện Yên Nhật
+    
     s_clean = s.replace(' ', '')
     
-    # b. Regex tìm số 
+    # 3. Regex lấy các cụm số
     raw_nums = re.findall(r'\d+(?:[.,]\d+)*', s_clean)
     nums = []
     for num_str in raw_nums:
@@ -33,18 +35,23 @@ def process_salary(s):
     if not nums:
         return np.nan, np.nan
         
-    # Quy đổi về Triệu VNĐ (Tỷ giá 25k)
+    # 4. Quy đổi ĐỒNG LOẠT về đơn vị Triệu VNĐ
     converted_nums = []
     for n in nums:
         if is_usd:
+            # USD -> VNĐ -> Triệu VNĐ
             converted_nums.append((n * 25000) / 1000000) 
+        elif is_jpy:
+            # JPY -> VNĐ -> Triệu VNĐ (Tỉ giá: 1 Yên = 160 VNĐ)
+            converted_nums.append((n * 160) / 1000000)
         else:
+            # Tiền Việt: Nếu số > 1000 (VD: 15.000.000) thì chia 1 triệu. Nếu nhỏ (VD: 15) thì giữ nguyên.
             if n > 1000: 
                 converted_nums.append(n / 1000000)
             else:        
                 converted_nums.append(n)
                 
-    # c. Xác định salary_min, salary_max
+    # 5. Phân bổ vào salary_min và salary_max
     if len(converted_nums) == 1:
         val = converted_nums[0]
         if any(x in s for x in ['up to', 'upto', 'lên đến', 'tối đa']):
@@ -55,7 +62,7 @@ def process_salary(s):
             return val, val 
     else:
         return min(converted_nums[0], converted_nums[1]), max(converted_nums[0], converted_nums[1])
-
+    
 # 2. Hàm xử lý Kinh nghiệm
 def process_exp(s):
     if pd.isna(s): return np.nan
