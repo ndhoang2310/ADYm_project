@@ -1,0 +1,1609 @@
+{
+    "Python": [
+        "Python",
+        "python",
+        "Python 3.x",
+        "Python 3",
+        "PySpark"
+    ],
+    "Java": [
+        "Java",
+        "java",
+        "JAVA",
+        "Java Core",
+        "Java 17",
+        "Java 21",
+        "Java SE",
+        "Java EE",
+        "J2EE",
+        "Java 17–21"
+    ],
+    "C#": [
+        "C#",
+        "c#",
+        "C Sharp"
+    ],
+    "C++": [
+        "C++",
+        "c++",
+        "C/C++"
+    ],
+    "C": [
+        "C"
+    ],
+    "Go": [
+        "Go",
+        "Golang",
+        "GO"
+    ],
+    "Rust": [
+        "Rust"
+    ],
+    "Ruby": [
+        "Ruby"
+    ],
+    "R": [
+        "R"
+    ],
+    "Perl": [
+        "Perl"
+    ],
+    "JavaScript": [
+        "JavaScript",
+        "Javascript",
+        "javascript",
+        "JS",
+        "js",
+        "JavaScript (ES6+)",
+        "ES6+",
+        "ES6"
+    ],
+    "TypeScript": [
+        "TypeScript",
+        "Typescript",
+        "typescript",
+        "TS"
+    ],
+    "PHP": [
+        "PHP",
+        "php",
+        "PHP 7+",
+        "PHP 7"
+    ],
+    "HTML": [
+        "HTML",
+        "HTML5",
+        "html",
+        "html5"
+    ],
+    "CSS": [
+        "CSS",
+        "CSS3",
+        "css",
+        "css3",
+        "SCSS",
+        "Sass"
+    ],
+    "SQL": [
+        "SQL",
+        "sql",
+        "SQL Server",
+        "MS SQL",
+        "MS-SQL Server",
+        "MS SQL Server",
+        "MSSQL",
+        "T-SQL",
+        "PL/SQL",
+        "HANA SQL Script"
+    ],
+    "XML": [
+        "XML",
+        "xml"
+    ],
+    "JSON": [
+        "JSON",
+        "json",
+        "JSON/XML"
+    ],
+    "YAML": [
+        "YAML"
+    ],
+    "Swift": [
+        "Swift"
+    ],
+    "Kotlin": [
+        "Kotlin",
+        "KOTLIN"
+    ],
+    "Dart": [
+        "Dart"
+    ],
+    "Objective-C": [
+        "Objective-C",
+        "Objective C"
+    ],
+    "Scala": [
+        "Scala"
+    ],
+    "Embedded C": [
+        "Embedded C",
+        "Embedded Linux"
+    ],
+    "Liquid": [
+        "Liquid",
+        "Shopify Liquid"
+    ],
+    "QWeb": [
+        "QWeb"
+    ],
+    "Bash": [
+        "Bash",
+        "Bash Script",
+        "Bash script",
+        "Shell Script",
+        "Shell script",
+        "shell"
+    ],
+    "LabVIEW": [
+        "Labview",
+        "LabVIEW",
+        "Labview"
+    ],
+    "Solidity": [
+        "Solidity"
+    ],
+    "React": [
+        "React",
+        "ReactJS",
+        "React.js",
+        "React JS",
+        "Reactjs",
+        "reactjs",
+        "React js"
+    ],
+    "Next.js": [
+        "Next.js",
+        "NextJS",
+        "Next JS",
+        "Nextjs",
+        "NextJs",
+        "NuxtJS",
+        "Next.JS"
+    ],
+    "Vue": [
+        "Vue",
+        "VueJS",
+        "Vue.js",
+        "Vue JS",
+        "Vuejs",
+        "Vue js",
+        "Vue.JS"
+    ],
+    "Nuxt.js": [
+        "Nuxt.js",
+        "NuxtJS",
+        "Nuxt JS",
+        "NuxtJs"
+    ],
+    "Angular": [
+        "Angular",
+        "AngularJS",
+        "Angular JS"
+    ],
+    "Svelte": [
+        "Svelte"
+    ],
+    "Ember.js": [
+        "Ember",
+        "Ember.js"
+    ],
+    "jQuery": [
+        "jQuery",
+        "JQuery",
+        "Jquery",
+        "jquery"
+    ],
+    "Bootstrap": [
+        "Bootstrap"
+    ],
+    "Tailwind CSS": [
+        "Tailwind",
+        "Tailwind CSS",
+        "TailwindCSS"
+    ],
+    "Material UI": [
+        "Material-UI",
+        "Material UI",
+        "MUI"
+    ],
+    "Styled Components": [
+        "Styled-components",
+        "Styled Components",
+        "CSS-in-JS"
+    ],
+    "Inertia.js": [
+        "Inertia.js",
+        "Inertia"
+    ],
+    "Redux": [
+        "Redux",
+        "Redux Saga",
+        "Redux Thunk",
+        "Redux Hook"
+    ],
+    "Zustand": [
+        "Zustand"
+    ],
+    "Pinia": [
+        "Pinia"
+    ],
+    "Vuex": [
+        "Vuex"
+    ],
+    "NgRx": [
+        "NgRx"
+    ],
+    "RxJS": [
+        "RxJS",
+        "RxSwift"
+    ],
+    "Context API": [
+        "Context API",
+        "Context"
+    ],
+    "BLoC": [
+        "BLoC",
+        "Bloc"
+    ],
+    "GetX": [
+        "GetX"
+    ],
+    "Provider": [
+        "Provider"
+    ],
+    "Webpack": [
+        "Webpack",
+        "webpack"
+    ],
+    "Vite": [
+        "Vite"
+    ],
+    "Parcel": [
+        "Parcel"
+    ],
+    "ESLint": [
+        "ESLint"
+    ],
+    "Husky": [
+        "Husky"
+    ],
+    "Spring": [
+        "Spring",
+        "Spring Framework"
+    ],
+    "Spring Boot": [
+        "Spring Boot",
+        "Spring boot",
+        "Spring Boot 2.x",
+        "Spring Boot 3.x",
+        "Springboot"
+    ],
+    "Spring MVC": [
+        "Spring MVC"
+    ],
+    "Spring Security": [
+        "Spring Security"
+    ],
+    "Spring Cloud": [
+        "Spring Cloud"
+    ],
+    "Hibernate": [
+        "Hibernate",
+        "Hibernate/JPA"
+    ],
+    "JPA": [
+        "JPA",
+        "Java JPA"
+    ],
+    "MyBatis": [
+        "MyBatis"
+    ],
+    "Struts": [
+        "Struts"
+    ],
+    "Quarkus": [
+        "Quarkus"
+    ],
+    "ZK": [
+        "ZK"
+    ],
+    "Maven": [
+        "Maven",
+        "maven"
+    ],
+    "Gradle": [
+        "Gradle"
+    ],
+    "Django": [
+        "Django",
+        "Django Rest Framework",
+        "Django ORM"
+    ],
+    "Flask": [
+        "Flask"
+    ],
+    "FastAPI": [
+        "FastAPI",
+        "Fast API"
+    ],
+    "Celery": [
+        "Celery"
+    ],
+    "Laravel": [
+        "Laravel",
+        "PHP Laravel",
+        "PHP - Laravel"
+    ],
+    "Yii": [
+        "Yii",
+        "YII"
+    ],
+    "Symfony": [
+        "Symfony"
+    ],
+    "CodeIgniter": [
+        "CodeIgniter"
+    ],
+    "ThinkPHP": [
+        "ThinkPHP"
+    ],
+    "Node.js": [
+        "Node.js",
+        "NodeJS",
+        "Nodejs",
+        "Node JS",
+        "Node.JS",
+        "node.js"
+    ],
+    "Express.js": [
+        "Express.js",
+        "Express",
+        "ExpressJS"
+    ],
+    "NestJS": [
+        "NestJS",
+        "Nest.js",
+        "NestJs"
+    ],
+    ".NET": [
+        ".NET",
+        ".NET Core",
+        ".NET Framework",
+        "dotnet",
+        "ASP.NET",
+        "ASP.NET Core",
+        "ASP.NET MVC",
+        ".NET Framework 4.x",
+        ".NET Core (C#)",
+        ".Net"
+    ],
+    "Entity Framework": [
+        "EF Core",
+        "Entity Framework",
+        "Entity Framework Core"
+    ],
+    "LINQ": [
+        "LINQ",
+        "LinQ"
+    ],
+    "WCF": [
+        "WCF"
+    ],
+    "WPF": [
+        "WPF"
+    ],
+    "WinForms": [
+        "Winforms",
+        "WinForms"
+    ],
+    "Kendo UI": [
+        "Kendo UI"
+    ],
+    "Gin": [
+        "Gin"
+    ],
+    "Echo": [
+        "Echo"
+    ],
+    "Ruby on Rails": [
+        "Ruby on Rails",
+        "Rails"
+    ],
+    "Odoo": [
+        "Odoo",
+        "Odoo 12",
+        "Odoo 16+"
+    ],
+    "Shopify": [
+        "Shopify",
+        "Shopify API",
+        "Shopify APIs",
+        "Shopify ecosystem",
+        "Shopify Liquid"
+    ],
+    "WordPress": [
+        "WordPress",
+        "wordpress",
+        "Wordpress"
+    ],
+    "Magento": [
+        "Magento"
+    ],
+    "Haravan": [
+        "Haravan"
+    ],
+    "REST API": [
+        "REST API",
+        "RESTful API",
+        "RESTful APIs",
+        "REST",
+        "RESTful",
+        "REST Api",
+        "Web API"
+    ],
+    "GraphQL": [
+        "GraphQL"
+    ],
+    "gRPC": [
+        "gRPC"
+    ],
+    "SOAP": [
+        "SOAP",
+        "SOAP API"
+    ],
+    "WebSocket": [
+        "WebSocket",
+        "Websocket",
+        "WebSockets"
+    ],
+    "XML-RPC": [
+        "XML-RPC",
+        "JSON-RPC"
+    ],
+    "OAuth2": [
+        "OAuth2",
+        "OAuth",
+        "OAuth 2"
+    ],
+    "JWT": [
+        "JWT",
+        "JSON Web Token"
+    ],
+    "SSO": [
+        "SSO"
+    ],
+    "Flutter": [
+        "Flutter"
+    ],
+    "React Native": [
+        "React Native",
+        "React native"
+    ],
+    "SwiftUI": [
+        "SwiftUI"
+    ],
+    "UIKit": [
+        "UIKit"
+    ],
+    "Android SDK": [
+        "Android SDK",
+        "Android Studio"
+    ],
+    "Xcode": [
+        "Xcode"
+    ],
+    "Cocoa Touch": [
+        "Cocoa Touch"
+    ],
+    "Core Data": [
+        "Core Data"
+    ],
+    "Realm": [
+        "Realm"
+    ],
+    "Room": [
+        "Room"
+    ],
+    "Combine": [
+        "Combine"
+    ],
+    "KMM": [
+        "KMM",
+        "Kotlin Multiplatform"
+    ],
+    "Retrofit": [
+        "Retrofit"
+    ],
+    "Glide": [
+        "Glide"
+    ],
+    "Dagger2": [
+        "Dagger2",
+        "Dagger"
+    ],
+    "RxJava": [
+        "RxJava"
+    ],
+    "Unity": [
+        "Unity",
+        "Unity3D",
+        "Unity Engine"
+    ],
+    "Cocos Creator": [
+        "Cocos Creator",
+        "Cocos",
+        "Cocos Engine"
+    ],
+    "Unreal Engine": [
+        "Unreal Engine",
+        "UE",
+        "Unreal"
+    ],
+    "Spine 2D": [
+        "Spine 2D",
+        "Spine",
+        "Spine 2D Animation"
+    ],
+    "Blender": [
+        "Blender",
+        "Blender 3D",
+        "3D Blender",
+        "BLENDER"
+    ],
+    "Maya": [
+        "Maya"
+    ],
+    "3ds Max": [
+        "3Dmax",
+        "3DSMAX",
+        "3ds Max",
+        "3D Max"
+    ],
+    "ZBrush": [
+        "ZBrush",
+        "Zbrush"
+    ],
+    "Substance Painter": [
+        "Substance 3D Painter",
+        "Substance Painter"
+    ],
+    "Substance Designer": [
+        "Substance Designer"
+    ],
+    "SketchUp": [
+        "SketchUp",
+        "Sketchup"
+    ],
+    "D5 Render": [
+        "D5 Render"
+    ],
+    "Lumion": [
+        "Lumion"
+    ],
+    "Cinema 4D": [
+        "CINEMA 4D",
+        "Cinema 4D",
+        "C4D"
+    ],
+    "Quixel Mixer": [
+        "Quixel Mixer"
+    ],
+    "SpeedTree": [
+        "SpeedTree"
+    ],
+    "SmartFox": [
+        "SmartFox",
+        "SmartFoxServer"
+    ],
+    "Socket.IO": [
+        "Socket.IO"
+    ],
+    "MySQL": [
+        "MySQL",
+        "mysql",
+        "MySql"
+    ],
+    "PostgreSQL": [
+        "PostgreSQL",
+        "Postgres",
+        "PostgreSql",
+        "Postgre",
+        "postgres"
+    ],
+    "Oracle DB": [
+        "Oracle",
+        "Oracle DB",
+        "Oracle Database"
+    ],
+    "SQL Server": [
+        "SQL Server",
+        "MS SQL Server",
+        "MS-SQL Server",
+        "MSSQL",
+        "MS SQL"
+    ],
+    "MariaDB": [
+        "MariaDB"
+    ],
+    "SQLite": [
+        "SQLite",
+        "sqlite"
+    ],
+    "Netezza": [
+        "Netezza"
+    ],
+    "MongoDB": [
+        "MongoDB",
+        "Mongo DB",
+        "mongodb",
+        "Mongo"
+    ],
+    "Redis": [
+        "Redis",
+        "redis"
+    ],
+    "Firebase": [
+        "Firebase",
+        "firebase"
+    ],
+    "Firestore": [
+        "Firestore"
+    ],
+    "DynamoDB": [
+        "DynamoDB"
+    ],
+    "Cassandra": [
+        "Cassandra"
+    ],
+    "CouchBase": [
+        "CouchBase",
+        "Couchbase"
+    ],
+    "Elasticsearch": [
+        "Elasticsearch",
+        "ElasticSearch",
+        "Elastic search",
+        "ES",
+        "ELK"
+    ],
+    "Pinecone": [
+        "Pinecone"
+    ],
+    "Weaviate": [
+        "Weaviate"
+    ],
+    "Milvus": [
+        "Milvus"
+    ],
+    "FAISS": [
+        "FAISS"
+    ],
+    "Qdrant": [
+        "Qdrant"
+    ],
+    "Chroma": [
+        "Chroma"
+    ],
+    "pgvector": [
+        "pgvector"
+    ],
+    "BigQuery": [
+        "BigQuery",
+        "Google BigQuery"
+    ],
+    "Redshift": [
+        "Redshift",
+        "AWS Redshift"
+    ],
+    "Snowflake": [
+        "Snowflake"
+    ],
+    "Hive": [
+        "Hive"
+    ],
+    "Apache Iceberg": [
+        "Apache Iceberg",
+        "Iceberg"
+    ],
+    "Dataverse": [
+        "Dataverse"
+    ],
+    "Kafka": [
+        "Kafka",
+        "Apache Kafka"
+    ],
+    "RabbitMQ": [
+        "RabbitMQ",
+        "Rabbit MQ"
+    ],
+    "ActiveMQ": [
+        "ActiveMQ"
+    ],
+    "Redis Queue": [
+        "Redis Queue",
+        "BullMQ"
+    ],
+    "MQTT": [
+        "MQTT"
+    ],
+    "Pub/Sub": [
+        "Pub/Sub",
+        "Google Pub/Sub"
+    ],
+    "Amazon SNS": [
+        "SNS"
+    ],
+    "Docker": [
+        "Docker",
+        "docker",
+        "Docker Container"
+    ],
+    "Kubernetes": [
+        "Kubernetes",
+        "K8S",
+        "k8s",
+        "K8s"
+    ],
+    "Jenkins": [
+        "Jenkins"
+    ],
+    "GitLab CI/CD": [
+        "GitLab CI",
+        "GitLab CI/CD",
+        "Gitlab CI"
+    ],
+    "GitHub Actions": [
+        "GitHub Actions",
+        "Github Actions"
+    ],
+    "Azure DevOps": [
+        "Azure DevOps"
+    ],
+    "ArgoCD": [
+        "ArgoCD",
+        "Argo CD"
+    ],
+    "CircleCI": [
+        "CircleCI"
+    ],
+    "Bamboo": [
+        "Bamboo"
+    ],
+    "Fastlane": [
+        "Fastlane"
+    ],
+    "Ansible": [
+        "Ansible"
+    ],
+    "Terraform": [
+        "Terraform"
+    ],
+    "Helm": [
+        "Helm",
+        "Helm charts"
+    ],
+    "Nginx": [
+        "Nginx",
+        "nginx",
+        "NGINX"
+    ],
+    "HAProxy": [
+        "HaProxy",
+        "HAProxy"
+    ],
+    "Gunicorn": [
+        "gunicorn"
+    ],
+    "PHP-FPM": [
+        "PHP-FPM"
+    ],
+    "VMware": [
+        "VMware",
+        "VMware ESXi",
+        "VMware vSphere"
+    ],
+    "Hyper-V": [
+        "Hyper-V"
+    ],
+    "AWS": [
+        "AWS",
+        "Amazon Web Services",
+        "Amazon AWS"
+    ],
+    "Google Cloud": [
+        "GCP",
+        "Google Cloud",
+        "Google Cloud Platform"
+    ],
+    "Microsoft Azure": [
+        "Azure",
+        "Microsoft Azure"
+    ],
+    "DigitalOcean": [
+        "DO",
+        "DigitalOcean",
+        "Digital Ocean"
+    ],
+    "Cloudflare": [
+        "Cloudflare"
+    ],
+    "Viettel Cloud": [
+        "Viettel Cloud"
+    ],
+    "VNPT Cloud": [
+        "VNPT Cloud"
+    ],
+    "AWS S3": [
+        "S3",
+        "AWS S3"
+    ],
+    "AWS Lambda": [
+        "Lambda",
+        "AWS Lambda"
+    ],
+    "AWS Glue": [
+        "Glue",
+        "AWS Glue"
+    ],
+    "AWS DMS": [
+        "DMS",
+        "AWS DMS"
+    ],
+    "AWS MWAA": [
+        "MWAA",
+        "AWS MWAA"
+    ],
+    "AWS CloudWatch": [
+        "CloudWatch",
+        "AWS CloudWatch"
+    ],
+    "Git": [
+        "Git",
+        "git",
+        "GIT"
+    ],
+    "GitHub": [
+        "GitHub",
+        "Github",
+        "github"
+    ],
+    "GitLab": [
+        "GitLab",
+        "Gitlab"
+    ],
+    "Bitbucket": [
+        "Bitbucket"
+    ],
+    "SVN": [
+        "SVN",
+        "Subversion"
+    ],
+    "Fisheye": [
+        "Fisheye"
+    ],
+    "Crucible": [
+        "Crucible"
+    ],
+    "Jira": [
+        "Jira",
+        "JIRA",
+        "jira"
+    ],
+    "Confluence": [
+        "Confluence"
+    ],
+    "Trello": [
+        "Trello"
+    ],
+    "Redmine": [
+        "Redmine"
+    ],
+    "ClickUp": [
+        "ClickUp",
+        "Click-up"
+    ],
+    "Notion": [
+        "Notion"
+    ],
+    "Microsoft Teams": [
+        "MS Teams",
+        "Microsoft Teams",
+        "Teams"
+    ],
+    "Slack": [
+        "Slack"
+    ],
+    "LarkSuite": [
+        "LarkSuite",
+        "Lark"
+    ],
+    "Backlog": [
+        "Backlog"
+    ],
+    "TensorFlow": [
+        "TensorFlow",
+        "Tensorflow",
+        "TensorFLow"
+    ],
+    "PyTorch": [
+        "PyTorch",
+        "Pytorch",
+        "pytorch"
+    ],
+    "Scikit-learn": [
+        "Scikit-learn",
+        "Scikit learn",
+        "sklearn"
+    ],
+    "Keras": [
+        "Keras"
+    ],
+    "Caffe": [
+        "Caffe"
+    ],
+    "Theano": [
+        "Theano"
+    ],
+    "NLTK": [
+        "NLTK"
+    ],
+    "SpaCy": [
+        "SpaCy",
+        "Spacy"
+    ],
+    "Hugging Face": [
+        "Hugging Face",
+        "HuggingFace"
+    ],
+    "OpenCV": [
+        "OpenCV",
+        "opencv"
+    ],
+    "Pillow": [
+        "Pillow"
+    ],
+    "scikit-image": [
+        "skimage",
+        "scikit-image"
+    ],
+    "Pandas": [
+        "Pandas",
+        "pandas"
+    ],
+    "NumPy": [
+        "NumPy",
+        "Numpy",
+        "numpy"
+    ],
+    "Apache Spark": [
+        "Spark",
+        "Apache Spark",
+        "PySpark"
+    ],
+    "Matplotlib": [
+        "Matplotlib"
+    ],
+    "Seaborn": [
+        "Seaborn"
+    ],
+    "LangChain": [
+        "LangChain",
+        "Langchain"
+    ],
+    "LangGraph": [
+        "LangGraph"
+    ],
+    "LangSmith": [
+        "LangSmith"
+    ],
+    "LlamaIndex": [
+        "LlamaIndex",
+        "Llama Index"
+    ],
+    "CrewAI": [
+        "CrewAI"
+    ],
+    "Agno": [
+        "Agno"
+    ],
+    "GPT": [
+        "GPT",
+        "ChatGPT",
+        "GPT-4",
+        "OpenAI GPT"
+    ],
+    "BERT": [
+        "BERT"
+    ],
+    "T5": [
+        "T5"
+    ],
+    "LLaMA": [
+        "LLaMA",
+        "Llama",
+        "LLaMA 2"
+    ],
+    "DeepSeek": [
+        "DeepSeek",
+        "DeepSeek-OCR"
+    ],
+    "Qwen": [
+        "Qween",
+        "Qwen"
+    ],
+    "Claude": [
+        "Claude"
+    ],
+    "Gemini": [
+        "Gemini"
+    ],
+    "ROBERTa": [
+        "ROBERTa",
+        "RoBERTa"
+    ],
+    "BART": [
+        "BART"
+    ],
+    "PaddleOCR": [
+        "PaddleOCR"
+    ],
+    "TrOCR": [
+        "TrOCR"
+    ],
+    "CRNN": [
+        "CRNN"
+    ],
+    "Tesseract": [
+        "Tesseract"
+    ],
+    "LayoutLM": [
+        "LayoutLM"
+    ],
+    "DocFormer": [
+        "DocFormer"
+    ],
+    "Detectron": [
+        "Detectron",
+        "Detectron2"
+    ],
+    "YOLO": [
+        "YOLO"
+    ],
+    "Apache Airflow": [
+        "Airflow",
+        "Apache Airflow",
+        "MWAA"
+    ],
+    "dbt": [
+        "dbt",
+        "Data Build Tool"
+    ],
+    "Airbyte": [
+        "Airbyte"
+    ],
+    "n8n": [
+        "n8n"
+    ],
+    "Prefect": [
+        "Prefect"
+    ],
+    "Debezium": [
+        "Debezium"
+    ],
+    "Talend": [
+        "Talend"
+    ],
+    "SSIS": [
+        "SSIS"
+    ],
+    "Power BI": [
+        "Power BI",
+        "PowerBI",
+        "Power-BI"
+    ],
+    "Tableau": [
+        "Tableau",
+        "Tab-leau"
+    ],
+    "Looker": [
+        "Looker",
+        "Google Looker Studio",
+        "Looker Studio"
+    ],
+    "Google Data Studio": [
+        "Google Data Studio"
+    ],
+    "Superset": [
+        "Superset",
+        "Apache Superset"
+    ],
+    "BI Publisher": [
+        "BI Publisher"
+    ],
+    "Google Analytics": [
+        "Google Analytics",
+        "GA4"
+    ],
+    "Google Tag Manager": [
+        "GTM",
+        "Google Tag Manager"
+    ],
+    "Adjust": [
+        "Adjust"
+    ],
+    "Appsflyer": [
+        "Appsflyer",
+        "AppsFlyer"
+    ],
+    "Firebase Analytics": [
+        "Firebase Analytics"
+    ],
+    "Datadog": [
+        "Datadog"
+    ],
+    "Selenium": [
+        "Selenium"
+    ],
+    "Playwright": [
+        "Playwright"
+    ],
+    "Cypress": [
+        "Cypress"
+    ],
+    "Appium": [
+        "Appium"
+    ],
+    "Katalon": [
+        "Katalon"
+    ],
+    "WebdriverIO": [
+        "WebdriverIO"
+    ],
+    "Karate": [
+        "Karate"
+    ],
+    "Serenity BDD": [
+        "Serenity BDD"
+    ],
+    "Postman": [
+        "Postman",
+        "postman"
+    ],
+    "Newman": [
+        "Newman"
+    ],
+    "Rest Assured": [
+        "RestAssured",
+        "Rest Assured"
+    ],
+    "SoapUI": [
+        "SoapUI"
+    ],
+    "Insomnia": [
+        "Insomnia"
+    ],
+    "JMeter": [
+        "JMeter",
+        "Jmeter",
+        "Jmetter",
+        "Apache JMeter"
+    ],
+    "Apache AB": [
+        "Apache AB"
+    ],
+    "Jest": [
+        "Jest"
+    ],
+    "Mocha": [
+        "Mocha"
+    ],
+    "JUnit": [
+        "JUnit"
+    ],
+    "TestNG": [
+        "TestNG"
+    ],
+    "Mockito": [
+        "Mockito"
+    ],
+    "Cucumber": [
+        "Cucumber"
+    ],
+    "React Testing Library": [
+        "React Testing Library"
+    ],
+    "Karma": [
+        "Karma"
+    ],
+    "SonarQube": [
+        "SonarQube",
+        "Sonarqube",
+        "SonarQ"
+    ],
+    "Snagit": [
+        "Snagit"
+    ],
+    "Figma": [
+        "Figma",
+        "figma"
+    ],
+    "Adobe Photoshop": [
+        "Photoshop",
+        "PSD",
+        "Ps",
+        "PS",
+        "Adobe Photoshop",
+        "PTS"
+    ],
+    "Adobe Illustrator": [
+        "Illustrator",
+        "AI",
+        "Ai",
+        "Adobe Illustrator"
+    ],
+    "Adobe InDesign": [
+        "InDesign",
+        "Adobe InDesign"
+    ],
+    "Adobe Premiere": [
+        "Premiere",
+        "Pr",
+        "Adobe Premiere"
+    ],
+    "Adobe After Effects": [
+        "After Effects",
+        "After Effect",
+        "Ae",
+        "AE",
+        "Adobe After Effects"
+    ],
+    "Adobe XD": [
+        "Xd",
+        "Adobe XD",
+        "XD"
+    ],
+    "CorelDRAW": [
+        "CorelDRAW",
+        "Corel Draw",
+        "Corel",
+        "corel"
+    ],
+    "Canva": [
+        "Canva",
+        "canva"
+    ],
+    "CapCut": [
+        "Capcut",
+        "CapCut",
+        "Capcut PC"
+    ],
+    "DaVinci Resolve": [
+        "Daven Resolve",
+        "DaVinci Resolve"
+    ],
+    "Sketch": [
+        "Sketch"
+    ],
+    "Balsamiq": [
+        "Balsamiq"
+    ],
+    "Draw.io": [
+        "Draw.io",
+        "draw.io"
+    ],
+    "Miro": [
+        "Miro"
+    ],
+    "Axure": [
+        "Axure",
+        "axure"
+    ],
+    "Visio": [
+        "Visio",
+        "Microsoft Visio"
+    ],
+    "Lightroom": [
+        "Lightroom"
+    ],
+    "Clip Studio Paint": [
+        "Clip Studio Paint"
+    ],
+    "Procreate": [
+        "Procreate",
+        "procreate"
+    ],
+    "Prometheus": [
+        "Prometheus"
+    ],
+    "Grafana": [
+        "Grafana"
+    ],
+    "ELK Stack": [
+        "ELK",
+        "ECK",
+        "ELK Stack"
+    ],
+    "Kibana": [
+        "Kibana"
+    ],
+    "Logstash": [
+        "Logstash"
+    ],
+    "Burp Suite": [
+        "Burp Suite",
+        "burpsuite",
+        "BurpSuite"
+    ],
+    "Acunetix": [
+        "Acunetix",
+        "acunetix"
+    ],
+    "ZAP": [
+        "ZAP",
+        "OWASP ZAP"
+    ],
+    "Kali Linux": [
+        "Kali Linux",
+        "Kali linux"
+    ],
+    "Metasploit": [
+        "Metasploit",
+        "metasploit"
+    ],
+    "Nessus": [
+        "Nessus"
+    ],
+    "Checkpoint": [
+        "Checkpoint"
+    ],
+    "Fortinet": [
+        "Fortigate",
+        "Fortinet"
+    ],
+    "Microsoft Defender": [
+        "Defender",
+        "Microsoft Defender"
+    ],
+    "Microsoft Intune": [
+        "Intune",
+        "Microsoft Intune"
+    ],
+    "Hashicorp Vault": [
+        "Hashicorp Vault",
+        "Vault"
+    ],
+    "Linux": [
+        "Linux",
+        "linux",
+        "CentOS",
+        "Centos",
+        "Ubuntu",
+        "Red Hat",
+        "Redhat",
+        "Oracle Linux"
+    ],
+    "Windows Server": [
+        "Windows Server",
+        "Windows server"
+    ],
+    "Unix": [
+        "Unix",
+        "Linux/Unix"
+    ],
+    "Active Directory": [
+        "Active Directory",
+        "AD"
+    ],
+    "Exchange": [
+        "Exchange",
+        "Microsoft Exchange"
+    ],
+    "SharePoint": [
+        "SharePoint",
+        "SharePoint Online"
+    ],
+    "Power Platform": [
+        "Power Platform"
+    ],
+    "Power Apps": [
+        "Power Apps"
+    ],
+    "Power Automate": [
+        "Power Automate"
+    ],
+    "Microsoft Dynamics 365": [
+        "Microsoft Dynamics 365",
+        "Microsoft Dynamic Customer Engagement 365",
+        "Dynamics 365"
+    ],
+    "Blockchain": [
+        "Blockchain",
+        "blockchain"
+    ],
+    "Ethereum": [
+        "Ethereum"
+    ],
+    "Solana": [
+        "Solana"
+    ],
+    "Cosmos SDK": [
+        "Cosmos SDK"
+    ],
+    "Web3": [
+        "Web3",
+        "DApps"
+    ],
+    "SAP": [
+        "SAP",
+        "SAP ABAP",
+        "SAP S/4HANA",
+        "SAP GUI"
+    ],
+    "SAP ABAP": [
+        "ABAP",
+        "SAP ABAP",
+        "Classic ABAP",
+        "ABAP Cloud",
+        "RAP"
+    ],
+    "SAP CDS Views": [
+        "CDS View",
+        "CDS Views"
+    ],
+    "T24": [
+        "T24"
+    ],
+    "MISA": [
+        "MISA"
+    ],
+    "KiotViet": [
+        "KiotViet"
+    ],
+    "PLC Mitsubishi": [
+        "Mitsu",
+        "Mitsubishi",
+        "GX-works2"
+    ],
+    "PLC Omron": [
+        "Omron"
+    ],
+    "PLC Siemens": [
+        "Siemen",
+        "Siemens",
+        "Simatic Step 7"
+    ],
+    "GT Designer": [
+        "GT designer 3",
+        "GT Designer"
+    ],
+    "ROS 2": [
+        "ROS 2",
+        "ROS2",
+        "ROS"
+    ],
+    "NVIDIA Isaac Sim": [
+        "Isaac Sim",
+        "NVIDIA Isaac Sim"
+    ],
+    "NVIDIA Omniverse": [
+        "Omniverse",
+        "Nvidia Omniverse"
+    ],
+    "CANoe": [
+        "CANoe",
+        "CANalyzer"
+    ],
+    "Embedded Linux": [
+        "Embedded Linux"
+    ],
+    "RTOS": [
+        "RTOS"
+    ],
+    "Broadcom SDK": [
+        "Broadcom",
+        "Brcm"
+    ],
+    "MediaTek SDK": [
+        "Mediatek"
+    ],
+    "Qualcomm SDK": [
+        "Qualcomm",
+        "Qualcom"
+    ],
+    "OpenWrt": [
+        "OpenWrt"
+    ],
+    "PrplOS": [
+        "PrplOS"
+    ],
+    "Mastercam": [
+        "Mastercam"
+    ],
+    "Cimatron": [
+        "Cimatron"
+    ],
+    "SolidWorks": [
+        "SolidWorks",
+        "Solidwork",
+        "Solidworks"
+    ],
+    "AutoCAD": [
+        "AutoCAD",
+        "Autocad",
+        "Autocad 2D"
+    ],
+    "Inventor": [
+        "Inventor"
+    ],
+    "Revit": [
+        "Revit"
+    ],
+    "Google AdMob": [
+        "Google Admob",
+        "AdMob",
+        "Admob"
+    ],
+    "Facebook SDK": [
+        "Facebook SDK",
+        "Facebook"
+    ],
+    "IronSource": [
+        "Ironsource",
+        "IronSource"
+    ],
+    "Firebase SDK": [
+        "Firebase"
+    ],
+    "Google Maps API": [
+        "Google Map API",
+        "Google Maps"
+    ],
+    "OutSystems": [
+        "OutSystems",
+        "OutSystems Reactive Web"
+    ],
+    "Zapier": [
+        "Zapier"
+    ],
+    "Make": [
+        "Make"
+    ],
+    "Workato": [
+        "Workato"
+    ],
+    "Electron.js": [
+        "Electron.js",
+        "Electron",
+        "ElectronJS"
+    ],
+    "Tauri": [
+        "Tauri"
+    ],
+    "MFC": [
+        "MFC",
+        "Microsoft Foundation Classes"
+    ],
+    "Qt": [
+        "Qt"
+    ],
+    "GitHub Copilot": [
+        "GitHub Copilot",
+        "Copilot"
+    ],
+    "Cursor": [
+        "Cursor"
+    ],
+    "Scratch": [
+        "Scratch"
+    ]
+}
