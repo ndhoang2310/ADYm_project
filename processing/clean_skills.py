@@ -6,9 +6,11 @@ import os
 # ============================================================
 # 1. CẤU HÌNH ĐƯỜNG DẪN 
 # ============================================================
-PATH_JSON_CONFIG = r'D:\Documents\Clean\data\mapping_dict.json'      # Đường dẫn tới file JSON bạn đã lưu
-PATH_RAW_CSV     = r'D:\Documents\Clean\processing\data\raw_jobs.csv'           # File dữ liệu thô
-PATH_OUTPUT_CSV  = 'clean_text.csv'         # File đầu ra sạch
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__)) 
+ROOT_DIR = os.path.dirname(CURRENT_DIR)
+PATH_JSON_CONFIG = os.path.join(ROOT_DIR, 'data', 'mapping_dict.json')
+PATH_RAW_CSV     = os.path.join(ROOT_DIR, 'data', 'raw_jobs.csv')
+PATH_OUTPUT_CSV  = os.path.join(CURRENT_DIR, 'artifacts', 'clean_skills.csv')
 
 # ============================================================
 # 2. LOAD CẤU HÌNH TECH MAPPING

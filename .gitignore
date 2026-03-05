@@ -17,3 +17,4 @@ artifacts/
 *.pt
 models/saved/
 data/raw_jobs.csv
+data/final_dataset.csv

@@ -19,5 +19,5 @@ python-dotenv          # đổi từ 'dotenv' → tên package đúng trên PyPI
 # ----------------------------
 pandas
 numpy
-regex                  # re mở rộng, dùng cho NLP pattern matching
+regex                  
 

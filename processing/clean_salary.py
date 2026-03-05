@@ -322,7 +322,7 @@ if __name__ == "__main__":
     # Export đúng định dạng vào thư mục processing/artifacts
     output_dir = 'processing/artifacts'
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, 'clean_structured.csv')
+    output_path = os.path.join(output_dir, 'clean_salary.csv')
     
     df_clean.to_csv(output_path, index=False, encoding='utf-8-sig')
     logging.info(f"Hoàn tất! Data đã lưu tại: {output_path}")
