@@ -5,8 +5,8 @@ Kéo toàn bộ dữ liệu từ 5 collection MongoDB Atlas,
 chuẩn hóa schema, xử lý duplicate và export ra raw_jobs.csv.
 
 Yêu cầu file .env cùng thư mục:
-    MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/
-    MONGO_DB=<tên database>
+    MONGO_URI=
+    MONGO_DB=ADYM
 
 Author : Leader (Nguyễn Đình Hoàng)
 Project: Vietnam IT Market Analysis & Salary Prediction
