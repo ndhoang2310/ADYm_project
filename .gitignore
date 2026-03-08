@@ -16,6 +16,7 @@ artifacts/
 *.h5
 *.pt
 models/saved/
-data/raw_jobs.csv
-data/final_dataset.csv
+data/*
+!data/mapping_dict.json
+!data/job_schema.json
 processing/data/
