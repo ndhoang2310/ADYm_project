@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 # 1. SETUP ĐƯỜNG DẪN TỰ ĐỘNG
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(CURRENT_DIR)
-PATH_FINAL = os.path.join(ROOT_DIR, 'data', 'final_dataset.csv')
+PATH_FINAL = os.path.join(ROOT_DIR, 'data', 'final_dataset_title.csv')
 ENV_PATH = os.path.join(ROOT_DIR, '.env')
 
 # 2. LOAD BIẾN MÔI TRƯỜNG
