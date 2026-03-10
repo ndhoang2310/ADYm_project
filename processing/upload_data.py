@@ -13,7 +13,7 @@ ENV_PATH = os.path.join(ROOT_DIR, '.env')
 load_dotenv(ENV_PATH)
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME", "VietnamITMarket")
-COLLECTION_NAME = "jobs_clean_1"  # Collection mới dành cho data đã sạch
+COLLECTION_NAME = "jobs_clean_2"  # Collection mới dành cho data đã sạch
 
 def upload_to_mongodb():
     print(f"🚀 Bắt đầu quá trình Upload lên MongoDB...")
