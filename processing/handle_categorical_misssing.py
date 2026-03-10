@@ -12,7 +12,7 @@ if __name__ == "__main__":
     project_root = os.path.dirname(current_dir)
     
     # Trỏ thẳng tới file final_dataset.csv trong thư mục data
-    input_path = os.path.join(project_root, "processing", 'data', 'final_dataset.csv')
+    input_path = os.path.join(project_root,'data', 'final_dataset_title.csv')
     
     # Tạo tên file output mới để không ghi đè mất file gốc (đề phòng cần rollback)
     output_path = os.path.join(project_root, 'data', 'dataset_after_categorical_imputing.csv')

@@ -6,14 +6,14 @@ from dotenv import load_dotenv
 # 1. SETUP ĐƯỜNG DẪN TỰ ĐỘNG
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(CURRENT_DIR)
-PATH_FINAL = os.path.join(ROOT_DIR, 'data', 'final_dataset_title.csv')
+PATH_FINAL = os.path.join(ROOT_DIR, 'data', 'dataset_after_categorical_imputing.csv')
 ENV_PATH = os.path.join(ROOT_DIR, '.env')
 
 # 2. LOAD BIẾN MÔI TRƯỜNG
 load_dotenv(ENV_PATH)
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME", "VietnamITMarket")
-COLLECTION_NAME = "jobs_clean"  # Collection mới dành cho data đã sạch
+COLLECTION_NAME = "jobs_clean_1"  # Collection mới dành cho data đã sạch
 
 def upload_to_mongodb():
     print(f"🚀 Bắt đầu quá trình Upload lên MongoDB...")
@@ -62,3 +62,4 @@ def upload_to_mongodb():
 
 if __name__ == "__main__":
     upload_to_mongodb()
+    
