@@ -144,17 +144,18 @@ def process_location(s):
     if s_lower.strip() in ['0', 'unknown', 'not available, none', 'none']:
         return 'Khác'
 
-    found_locs = set() # Dùng set để tránh trùng lặp nếu chuỗi ghi "Hà Nội, Cầu Giấy, Hà Nội"
+    # SỬA ĐỔI: Dùng list thay vì set để giữ đúng thứ tự ưu tiên
+    found_locs = [] 
     
     # 1. Quét các yếu tố Quốc tế -> Gắn mác 'Khác'
     if any(x in s_lower for x in ['nước ngoài', 'nhật bản', 'quốc tế', 'international', 'japan', 'singapore']):
-        found_locs.add('Khác')
+        found_locs.append('Khác')
         
     # 2. Quét Remote
     if any(x in s_lower for x in ['remote', 'từ xa', 'tại nhà']):
-        found_locs.add('Remote')
+        found_locs.append('Remote')
 
-    # 3. Từ điển 63 Tỉnh Thành & Các biến thể phổ biến
+    # 3. Từ điển Tỉnh Thành (Đã sắp xếp thứ tự ưu tiên các trung tâm lớn lên đầu)
     provinces_map = {
         'Hồ Chí Minh': ['hồ chí minh', 'hcm', 'sài gòn', 'saigon', 'thủ đức', 'nhà bè', 'cần giờ', 'củ chi', 'hóc môn'],
         'Hà Nội': ['hà nội', 'ha noi', 'hn', 'cầu giấy', 'nam từ liêm', 'bắc từ liêm', 'thanh xuân', 'hoàn kiếm', 'ba đình', 'đống đa', 'tây hồ', 'hoàng mai', 'long biên', 'gia lâm', 'hoài đức'],
@@ -203,18 +204,15 @@ def process_location(s):
     # Quét chuỗi dựa trên từ điển
     for clean_name, keywords in provinces_map.items():
         if any(keyword in s_lower for keyword in keywords):
-            found_locs.add(clean_name)
+            if clean_name not in found_locs:
+                found_locs.append(clean_name)
 
     # Nếu quét xong không tìm thấy tỉnh nào -> Cho vào 'Khác'
     if not found_locs:
-        found_locs.add('Khác')
+        return 'Khác'
         
-    # Xử lý format đầu ra: List nếu nhiều nơi, String nếu 1 nơi
-    found_list = list(found_locs)
-    if len(found_list) == 1:
-        return found_list[0]
-    else:
-        return found_list
+    # SỬA ĐỔI: Luôn luôn trả về phần tử ĐẦU TIÊN thay vì trả về cả list
+    return found_locs[0]
 
 # 4. Hàm mapping Job Level (Ordinal Encoding)
 def process_level(s):
