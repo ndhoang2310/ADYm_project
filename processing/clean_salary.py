@@ -6,7 +6,6 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-# 1. Hàm bóc tách và quy đổi Lương
 def process_salary(s):
     if pd.isna(s): 
         return np.nan, np.nan
@@ -22,7 +21,6 @@ def process_salary(s):
     is_jpy = '¥' in s or 'jpy' in s or 'yên' in s
     is_year = 'năm' in s or 'year' in s or '/năm' in s
     
-    # BẮT THÊM CỜ: Kiểm tra xem trong câu có chữ "triệu" không
     is_trieu = any(x in s for x in ['triệu', 'tr', 'm', 'million'])
     
     if 'bonus' in s:
@@ -52,20 +50,19 @@ def process_salary(s):
         elif is_jpy:
             converted_nums.append((n * 160) / 1000000)
         else:
-            # === LOGIC MỚI SIÊU CHẶT CHẼ ===
-            if n >= 100000:         # VD: 15.000.000 -> 15 Triệu
+            if n >= 100000:
                 val = n / 1000000
-            elif n >= 1000:         # VD: 1000, 2000
-                if is_trieu:        # Nếu ghi "1000 triệu"
+            elif n >= 1000:
+                if is_trieu:
                     val = n
-                else:               # Nếu ghi "VND 1.000" -> 1 Triệu
+                else:
                     val = n / 1000 
-            elif n >= 100:          # VD: 800, 150, 100
-                if is_trieu:        # Nếu ghi "100 - 150 triệu" -> Giữ nguyên 100 Triệu
+            elif n >= 100:
+                if is_trieu:
                     val = n
-                else:               # Nếu ghi "800 - 1000 ₫" -> 0.8 Triệu (800k)
+                else:
                     val = n / 1000 
-            else:                   # VD: 15, 20 -> 15 Triệu
+            else:
                 val = n
                 
             if 'tỷ' in s or 'tỉ' in s:
@@ -92,70 +89,51 @@ def process_salary(s):
         c_max = max(converted_nums[0], converted_nums[1])
         return round(c_min, 2), round(c_max, 2)
     
-# 2. Hàm xử lý Kinh nghiệm
 def process_exp(s):
-    # 1. Nếu trống (NaN, Null)
     if pd.isna(s): 
         return -1.0
         
     s_lower = str(s).lower().strip()
     
-    # 2. Các từ khóa báo hiệu dữ liệu trống/ẩn
     if s_lower in ['không hiển thị', 'none', 'null', '']:
         return -1.0
         
-    # 3. Không yêu cầu / Chưa có kinh nghiệm
     if any(x in s_lower for x in ['không yêu cầu', 'chưa có', 'fresher', 'mới tốt nghiệp', 'không đòi hỏi']):
         return 0.0
         
-    # 4. Dưới 1 năm
     if 'dưới 1' in s_lower or '< 1' in s_lower:
         return 0.5
         
-    # 5. Dùng Regex để móc TẤT CẢ các con số ra khỏi chuỗi
-    # r'\d+' sẽ bỏ qua các dấu trừ (VD: "-1 - 15 năm" sẽ lấy được 1 và 15)
     nums = re.findall(r'\d+(?:\.\d+)?', s_lower)
     
     if not nums:
         return -1.0
         
-    # Ép kiểu sang float
     num_vals = [float(n) for n in nums]
     
-    # 6. Xử lý các số đã tìm được
     if len(num_vals) == 1:
-        # Trường hợp chỉ có 1 số: "5 năm", "Trên 5 năm", "Lên đến 1 năm", "3"
         return num_vals[0]
         
     elif len(num_vals) >= 2:
-        # Trường hợp a - b năm (VD: "3 - 5 năm", "0-50 năm", "-1 - 15 Năm")
-        # Ta lấy giá trị nhỏ nhất (Min) theo như chiến thuật đã phân tích
-        # Nếu bạn đổi ý muốn lấy trung bình, chỉ cần thay bằng: return (num_vals[0] + num_vals[1]) / 2.0
         return min(num_vals[0], num_vals[1])
         
     return -1.0
-# 3. Hàm mapping Địa điểm
 def process_location(s):
     if pd.isna(s): return 'Khác'
     
     s_lower = str(s).lower()
     
-    # Những từ khóa rác báo hiệu dữ liệu trống hoặc không hợp lệ
     if s_lower.strip() in ['0', 'unknown', 'not available, none', 'none']:
         return 'Khác'
 
-    # SỬA ĐỔI: Dùng list thay vì set để giữ đúng thứ tự ưu tiên
     found_locs = [] 
     
-    # 1. Quét các yếu tố Quốc tế -> Gắn mác 'Khác'
     if any(x in s_lower for x in ['nước ngoài', 'nhật bản', 'quốc tế', 'international', 'japan', 'singapore']):
         found_locs.append('Khác')
         
-    # 2. Quét Remote
     if any(x in s_lower for x in ['remote', 'từ xa', 'tại nhà']):
         found_locs.append('Remote')
 
-    # 3. Từ điển Tỉnh Thành (Đã sắp xếp thứ tự ưu tiên các trung tâm lớn lên đầu)
     provinces_map = {
         'Hồ Chí Minh': ['hồ chí minh', 'hcm', 'sài gòn', 'saigon', 'thủ đức', 'nhà bè', 'cần giờ', 'củ chi', 'hóc môn'],
         'Hà Nội': ['hà nội', 'ha noi', 'hn', 'cầu giấy', 'nam từ liêm', 'bắc từ liêm', 'thanh xuân', 'hoàn kiếm', 'ba đình', 'đống đa', 'tây hồ', 'hoàng mai', 'long biên', 'gia lâm', 'hoài đức'],
@@ -201,98 +179,78 @@ def process_location(s):
         'Bắc Giang': ['bắc giang']
     }
 
-    # Quét chuỗi dựa trên từ điển
     for clean_name, keywords in provinces_map.items():
         if any(keyword in s_lower for keyword in keywords):
             if clean_name not in found_locs:
                 found_locs.append(clean_name)
 
-    # Nếu quét xong không tìm thấy tỉnh nào -> Cho vào 'Khác'
     if not found_locs:
         return 'Khác'
         
-    # SỬA ĐỔI: Luôn luôn trả về phần tử ĐẦU TIÊN thay vì trả về cả list
     return found_locs[0]
 
-# 4. Hàm mapping Job Level (Ordinal Encoding)
 def process_level(s):
-    # Nếu trống (NaN, None) -> Trả về -1
     if pd.isna(s): 
         return -1
         
     s_lower = str(s).lower().strip()
     
-    # Mức 5: Giám đốc / Cấp cao
     if any(x in s_lower for x in ['giám đốc', 'cấp cao']):
         return 5
         
-    # Mức 4: Quản lý / Trưởng - Phó phòng / Trưởng chi nhánh
     if any(x in s_lower for x in ['quản lý', 'trưởng phòng', 'phó phòng', 'trưởng/phó phòng', 'trưởng chi nhánh']):
         return 4
         
-    # Mức 3: Trưởng nhóm / Giám sát
     if any(x in s_lower for x in ['trưởng nhóm', 'giám sát']):
         return 3
         
-    # Mức 2: Nhân viên
     if 'nhân viên' in s_lower:
         return 2
         
-    # Mức 1: Mới tốt nghiệp = Fresher
     if 'mới tốt nghiệp' in s_lower or 'fresher' in s_lower:
         return 1
         
-    # Mức 0: Thực tập sinh / Sinh viên = Intern
     if any(x in s_lower for x in ['thực tập', 'sinh viên', 'intern']):
         return 0
         
-    # Nếu có giá trị nào khác không khớp với các từ khóa trên
     return -1
 
-# 5. Chuẩn hóa contract_type:
 def process_contract_type(s):
     if pd.isna(s):
-        return np.nan # Trả về NaN cho các dòng trống
+        return np.nan
         
     s_lower = str(s).lower()
     types_found = []
     
-    # 1. Full-time
     if any(x in s_lower for x in ['full-time', 'fulltime', 'nhân viên chính thức', 'toàn thời gian']):
         if 'Full-time' not in types_found:
             types_found.append('Full-time')
             
-    # 2. Part-time
     if any(x in s_lower for x in ['part-time', 'parttime', 'bán thời gian']):
         if 'Part-time' not in types_found:
             types_found.append('Part-time')
             
-    # 3. Freelance
     if any(x in s_lower for x in ['freelance', 'thời vụ', 'nghề tự do', 'dự án']):
         if 'Freelance' not in types_found:
             types_found.append('Freelance')
             
-    # 4. Intern
     if any(x in s_lower for x in ['thực tập', 'intern']):
         if 'Intern' not in types_found:
             types_found.append('Intern')
             
-    # 5. Khác (Bao gồm "Khác", "Làm tại nhà" hoặc những chuỗi không khớp với 4 loại trên)
     if 'khác' in s_lower or 'làm tại nhà' in s_lower or len(types_found) == 0:
         if 'Khác' not in types_found:
             types_found.append('Khác')
 
-    # Trả về kết quả
     if len(types_found) == 1:
-        return types_found[0] # Trả về chuỗi (string) nếu chỉ có 1
+        return types_found[0]
     elif len(types_found) > 1:
-        return types_found    # Trả về mảng (list) nếu có nhiều hình thức
+        return types_found
     else:
         return np.nan
 
 if __name__ == "__main__":
-    # ĐÃ SỬA: Đường dẫn trỏ tới thư mục data
-    input_path = 'data/raw_jobs.csv'
+    input_path = 'data/00_raw_jobs.csv'
     logging.info(f"Đang nạp file {input_path}...")
     
     try:
@@ -301,7 +259,6 @@ if __name__ == "__main__":
         logging.error(f"Không tìm thấy file tại '{input_path}'. Hãy chắc chắn bạn đang chạy code từ thư mục gốc của dự án.")
         exit()
     
-    # Transform dữ liệu
     logging.info("Đang xử lý các cột Structured Data...")
     df['salary_min'], df['salary_max'] = zip(*df['salary_raw'].apply(process_salary))
     df['exp_years'] = df['experience_raw'].apply(process_exp)
@@ -309,7 +266,6 @@ if __name__ == "__main__":
     df['job_level'] = df['job_level'].apply(process_level)
     df['contract_type'] = df['contract_type'].apply(process_contract_type)
     
-    # Giữ lại đúng các feature theo yêu cầu
     final_cols = [
         'url', 'contract_type', 
         'salary_min', 'salary_max', 
@@ -317,10 +273,9 @@ if __name__ == "__main__":
     ]
     df_clean = df[final_cols]
     
-    # Export đúng định dạng vào thư mục processing/artifacts
     output_dir = 'processing/artifacts'
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, 'clean_salary.csv')
+    output_path = os.path.join(output_dir, '01_clean_salary.csv')
     
     df_clean.to_csv(output_path, index=False, encoding='utf-8-sig')
     logging.info(f"Hoàn tất! Data đã lưu tại: {output_path}")

@@ -20,9 +20,6 @@ import pandas as pd
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
-# ---------------------------------------------------------------------------
-# Logging
-# ---------------------------------------------------------------------------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -31,11 +28,7 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
-# ⚙️  CONFIG — chỉnh tại đây
-# ---------------------------------------------------------------------------
 
-# Tên 5 collection (sửa cho khớp với Atlas của bạn)
 COLLECTIONS = [
     "careerviet_BAK",
     "topcv_Hoang",
@@ -46,10 +39,8 @@ COLLECTIONS = [
 ]
 
 
-# Đường dẫn file output
-OUTPUT_PATH = "data/raw_jobs.csv"
+OUTPUT_PATH = "data/00_raw_jobs.csv"
 
-# Schema chuẩn — thứ tự cột trong file output
 STANDARD_SCHEMA = [
     "url",
     "source",
@@ -74,13 +65,9 @@ STANDARD_SCHEMA = [
     "crawled_date",
 ]
 
-# Dedup keys
 DEDUP_KEYS = ["url", "job_title", "company_name"]
 
 
-# ---------------------------------------------------------------------------
-# Step 1: Fetch từng collection
-# ---------------------------------------------------------------------------
 
 def fetch_collection(db, name: str) -> pd.DataFrame:
     col = db[name]
@@ -89,7 +76,7 @@ def fetch_collection(db, name: str) -> pd.DataFrame:
         log.warning(f"  [{name}] Collection rỗng, bỏ qua.")
         return pd.DataFrame()
 
-    docs = list(col.find({}, {"_id": 0}))  # loại _id ngay tại query
+    docs = list(col.find({}, {"_id": 0}))
     df = pd.DataFrame(docs)
     log.info(f"  [{name}] {len(df):,} docs — {list(df.columns)}")
     return df
@@ -117,9 +104,6 @@ def fetch_all(mongo_uri: str, db_name: str) -> pd.DataFrame:
     return combined
 
 
-# ---------------------------------------------------------------------------
-# Step 2: Chuẩn hóa schema
-# ---------------------------------------------------------------------------
 
 def normalise_schema(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -127,32 +111,25 @@ def normalise_schema(df: pd.DataFrame) -> pd.DataFrame:
     - Cột không có trong STANDARD_SCHEMA (cột thừa) → drop
     - Sắp xếp lại đúng thứ tự STANDARD_SCHEMA
     """
-    # Thêm cột thiếu
     for col in STANDARD_SCHEMA:
         if col not in df.columns:
             df[col] = pd.NA
             log.info(f"  [schema] Thêm cột thiếu: '{col}' → NaN")
 
-    # Cột thừa (ngoài schema)
     extra = [c for c in df.columns if c not in STANDARD_SCHEMA]
     if extra:
         log.info(f"  [schema] Drop cột thừa: {extra}")
         df = df.drop(columns=extra)
 
-    # Sắp xếp đúng thứ tự
     df = df[STANDARD_SCHEMA]
     log.info(f"Sau chuẩn hóa schema: {len(df.columns)} cols — đúng chuẩn ✅")
     return df
 
 
-# ---------------------------------------------------------------------------
-# Step 3: Deduplication
-# ---------------------------------------------------------------------------
 
 def completeness_score(row: pd.Series) -> int:
     """Đếm số field không null/rỗng — dùng để chọn row đầy đủ nhất."""
     def is_empty(v) -> bool:
-        # Xử lý list/array (vd: skills_tags, job_domain)
         if isinstance(v, (list, dict)):
             return len(v) == 0
         try:
@@ -172,7 +149,6 @@ def deduplicate(df: pd.DataFrame) -> pd.DataFrame:
     """
     before = len(df)
 
-    # Chuẩn hóa key trước khi so sánh (lowercase, strip)
     for key in DEDUP_KEYS:
         if key in df.columns:
             df[f"_key_{key}"] = df[key].astype(str).str.strip().str.lower()
@@ -189,9 +165,6 @@ def deduplicate(df: pd.DataFrame) -> pd.DataFrame:
     return df.reset_index(drop=True)
 
 
-# ---------------------------------------------------------------------------
-# Step 4: Export
-# ---------------------------------------------------------------------------
 
 def export(df: pd.DataFrame, output_path: str) -> None:
     out = Path(output_path)
@@ -200,9 +173,6 @@ def export(df: pd.DataFrame, output_path: str) -> None:
     log.info(f"✅ Đã lưu → '{out}'  ({len(df):,} rows × {len(df.columns)} cols)")
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     load_dotenv()

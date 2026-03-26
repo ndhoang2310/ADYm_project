@@ -28,20 +28,20 @@ def standardize_job_title_v3(title):
     
     return 'Other'
 
-# 1. Đọc dữ liệu
-df = pd.read_csv('data/final_dataset.csv')
+def main():
+    df = pd.read_csv('data/02_merged_jobs.csv')
+    
+    df['job_category'] = df['job_title'].apply(standardize_job_title_v3)
+    
+    other_df = df[df['job_category'] == 'Other']['job_title'].value_counts().reset_index()
+    other_df.columns = ['job_title', 'count']
+    other_df.to_csv('data/03_unclassified_titles_report.csv', index=False, encoding='utf-8-sig')
+    
+    df.to_csv('data/03_jobs_with_titles.csv', index=False, encoding='utf-8-sig')
+    
+    print(f"✅ Đã chuẩn hóa xong. Số lượng rơi vào Other: {other_df['count'].sum()}")
+    print("📁 File dữ liệu ML: 03_jobs_with_titles.csv")
+    print("📁 File review Other: 03_unclassified_titles_report.csv")
 
-# 2. Tạo cột category
-df['job_category'] = df['job_title'].apply(standardize_job_title_v3)
-
-# 3. Trích xuất nhóm Other ra file CSV riêng
-other_df = df[df['job_category'] == 'Other']['job_title'].value_counts().reset_index()
-other_df.columns = ['job_title', 'count']
-other_df.to_csv('data/unclassified_other_titles.csv', index=False, encoding='utf-8-sig')
-
-# 4. Lưu lại dataset chuẩn cho ML
-df.to_csv('data/final_dataset_title.csv', index=False, encoding='utf-8-sig')
-
-print(f"✅ Đã chuẩn hóa xong. Số lượng rơi vào Other: {other_df['count'].sum()}")
-print("📁 File dữ liệu ML: dataset_for_ml.csv")
-print("📁 File review Other: unclassified_other_titles.csv")
+if __name__ == "__main__":
+    main()
