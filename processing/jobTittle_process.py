@@ -10,7 +10,7 @@ def standardize_job_title_v3(title):
     if re.search(r'project manager|product manager|pm\b|product owner|po\b|scrum master|dự án|project', t): return 'PM/PO'
     if re.search(r'test|qa\b|qc\b|quality|kiểm thử|đảm bảo chất lượng', t): return 'QA/Tester'
     if re.search(r'devops|cloud|system|hệ thống|mạng|network|security|bảo mật|an ninh|infrastructure|redteam|secops', t): return 'System/DevOps/Security'
-    if re.search(r'design|thiết kế|đồ họa|đồ hoạ|ui/ux|ui|ux|artist|2d|3d|animator|video|media|compositor|hình ảnh|quảng cáo|sáng tạo|motion', t): return 'Designer'
+
     if re.search(r'sale|kinh doanh|marketing|comtor|business development|phát triển kinh doanh|tư vấn|khách hàng|account|thu mua|sales|seo\b', t): return 'IT Sales/Marketing'
     if re.search(r'brse|cầu nối|bridge', t): return 'BrSE'
     if re.search(r'lead\b|leader|manager|director|architect|trưởng|giám đốc|cio|cto|head|tổ phó|giải pháp', t): return 'Management/Architect'
