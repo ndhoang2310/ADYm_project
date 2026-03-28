@@ -1,0 +1,405 @@
+Python
+Java
+C#
+C++
+C
+Go
+Rust
+Ruby
+R
+Perl
+JavaScript
+TypeScript
+PHP
+HTML
+CSS
+SQL
+XML
+JSON
+YAML
+Swift
+Kotlin
+Dart
+Objective-C
+Scala
+Embedded C
+Liquid
+QWeb
+Bash
+LabVIEW
+Solidity
+React
+Next.js
+Vue
+Nuxt.js
+Angular
+Svelte
+Ember.js
+jQuery
+Bootstrap
+Tailwind CSS
+Material UI
+Styled Components
+Inertia.js
+Redux
+Zustand
+Pinia
+Vuex
+NgRx
+RxJS
+Context API
+BLoC
+GetX
+Provider
+Webpack
+Vite
+Parcel
+ESLint
+Husky
+Spring
+Spring Boot
+Spring MVC
+Spring Security
+Spring Cloud
+Hibernate
+JPA
+MyBatis
+Struts
+Quarkus
+ZK
+Maven
+Gradle
+Django
+Flask
+FastAPI
+Celery
+Laravel
+Yii
+Symfony
+CodeIgniter
+ThinkPHP
+Node.js
+Express.js
+NestJS
+.NET
+Entity Framework
+LINQ
+WCF
+WPF
+WinForms
+Kendo UI
+Gin
+Echo
+Ruby on Rails
+Odoo
+Shopify
+WordPress
+Magento
+Haravan
+REST API
+GraphQL
+gRPC
+SOAP
+WebSocket
+XML-RPC
+OAuth2
+JWT
+SSO
+Flutter
+React Native
+SwiftUI
+UIKit
+Android SDK
+Xcode
+Cocoa Touch
+Core Data
+Realm
+Room
+Combine
+KMM
+Retrofit
+Glide
+Dagger2
+RxJava
+Unity
+Cocos Creator
+Unreal Engine
+Spine 2D
+Blender
+Maya
+3ds Max
+ZBrush
+Substance Painter
+Substance Designer
+SketchUp
+D5 Render
+Lumion
+Cinema 4D
+Quixel Mixer
+SpeedTree
+SmartFox
+Socket.IO
+MySQL
+PostgreSQL
+Oracle DB
+SQL Server
+MariaDB
+SQLite
+Netezza
+MongoDB
+Redis
+Firebase
+Firestore
+DynamoDB
+Cassandra
+CouchBase
+Elasticsearch
+Pinecone
+Weaviate
+Milvus
+FAISS
+Qdrant
+Chroma
+pgvector
+BigQuery
+Redshift
+Snowflake
+Hive
+Apache Iceberg
+Dataverse
+Kafka
+RabbitMQ
+ActiveMQ
+Redis Queue
+MQTT
+Pub/Sub
+Amazon SNS
+Docker
+Kubernetes
+Jenkins
+GitLab CI/CD
+GitHub Actions
+Azure DevOps
+ArgoCD
+CircleCI
+Bamboo
+Fastlane
+Ansible
+Terraform
+Helm
+Nginx
+HAProxy
+Gunicorn
+PHP-FPM
+VMware
+Hyper-V
+AWS
+Google Cloud
+Microsoft Azure
+DigitalOcean
+Cloudflare
+Viettel Cloud
+VNPT Cloud
+AWS S3
+AWS Lambda
+AWS Glue
+AWS DMS
+AWS MWAA
+AWS CloudWatch
+Git
+GitHub
+GitLab
+Bitbucket
+SVN
+Fisheye
+Crucible
+Jira
+Confluence
+Trello
+Redmine
+ClickUp
+Notion
+Microsoft Teams
+Slack
+LarkSuite
+Backlog
+TensorFlow
+PyTorch
+Scikit-learn
+Keras
+Caffe
+Theano
+NLTK
+SpaCy
+Hugging Face
+OpenCV
+Pillow
+scikit-image
+Pandas
+NumPy
+Apache Spark
+Matplotlib
+Seaborn
+LangChain
+LangGraph
+LangSmith
+LlamaIndex
+CrewAI
+Agno
+GPT
+BERT
+T5
+LLaMA
+DeepSeek
+Qwen
+Claude
+Gemini
+ROBERTa
+BART
+PaddleOCR
+TrOCR
+CRNN
+Tesseract
+LayoutLM
+DocFormer
+Detectron
+YOLO
+Apache Airflow
+dbt
+Airbyte
+n8n
+Prefect
+Debezium
+Talend
+SSIS
+Power BI
+Tableau
+Looker
+Google Data Studio
+Superset
+BI Publisher
+Google Analytics
+Google Tag Manager
+Adjust
+Appsflyer
+Firebase Analytics
+Datadog
+Selenium
+Playwright
+Cypress
+Appium
+Katalon
+WebdriverIO
+Karate
+Serenity BDD
+Postman
+Newman
+Rest Assured
+SoapUI
+Insomnia
+JMeter
+Apache AB
+Jest
+Mocha
+JUnit
+TestNG
+Mockito
+Cucumber
+React Testing Library
+Karma
+SonarQube
+Snagit
+Figma
+Adobe Photoshop
+Adobe Illustrator
+Adobe InDesign
+Adobe Premiere
+Adobe After Effects
+Adobe XD
+CorelDRAW
+Canva
+CapCut
+DaVinci Resolve
+Sketch
+Balsamiq
+Draw.io
+Miro
+Axure
+Visio
+Lightroom
+Clip Studio Paint
+Procreate
+Prometheus
+Grafana
+ELK Stack
+Kibana
+Logstash
+Burp Suite
+Acunetix
+ZAP
+Kali Linux
+Metasploit
+Nessus
+Checkpoint
+Fortinet
+Microsoft Defender
+Microsoft Intune
+Hashicorp Vault
+Linux
+Windows Server
+Unix
+Active Directory
+Exchange
+SharePoint
+Power Platform
+Power Apps
+Power Automate
+Microsoft Dynamics 365
+Blockchain
+Ethereum
+Solana
+Cosmos SDK
+Web3
+SAP
+SAP ABAP
+SAP CDS Views
+T24
+MISA
+KiotViet
+PLC Mitsubishi
+PLC Omron
+PLC Siemens
+GT Designer
+ROS 2
+NVIDIA Isaac Sim
+NVIDIA Omniverse
+CANoe
+Embedded Linux
+RTOS
+Broadcom SDK
+MediaTek SDK
+Qualcomm SDK
+OpenWrt
+PrplOS
+Mastercam
+Cimatron
+SolidWorks
+AutoCAD
+Inventor
+Revit
+Google AdMob
+Facebook SDK
+IronSource
+Firebase SDK
+Google Maps API
+OutSystems
+Zapier
+Make
+Workato
+Electron.js
+Tauri
+MFC
+Qt
+GitHub Copilot
+Cursor
+Scratch
